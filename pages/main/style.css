@@ -1,32 +1,22 @@
-/* old-standard-tt-regular - latin - analog font for 'Georgia' */
+/* anton-regular - latin */
 @font-face {
-    font-family: 'Old Standard TT';
+    font-family: 'Anton';
     font-style: normal;
     font-weight: 400;
     src: local(''),
-         url('../../assets/fonts/old-standard-tt-v18-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../../assets/fonts/old-standard-tt-v18-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
+         url('../../assets/fonts/anton-v23-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../../assets/fonts/anton-v23-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
 
-/* source-sans-pro-regular - latin - analog font for 'Arial' */
+/* goudy-bookletter-1911-regular - latin */
 @font-face {
-    font-family: 'Source Sans Pro';
+    font-family: 'Goudy Bookletter 1911';
     font-style: normal;
     font-weight: 400;
     src: local(''),
-         url('../../assets/fonts/source-sans-pro-v21-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../../assets/fonts/source-sans-pro-v21-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-
-/* source-sans-pro-italic - latin */
-@font-face {
-    font-family: 'Source Sans Pro';
-    font-style: italic;
-    font-weight: 400;
-    src: local(''),
-         url('../../assets/fonts/source-sans-pro-v21-latin-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-         url('../../assets/fonts/source-sans-pro-v21-latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
+         url('../../assets/fonts/goudy-bookletter-1911-v15-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../../assets/fonts/goudy-bookletter-1911-v15-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
 
 /* border-box model for all elements */
 
@@ -62,40 +52,27 @@ h1 {
     width: 190px;
     height: 35px;
     margin: 0;
-    font-family: 'Old Standard TT', serif;
-    font-style: normal;
-    font-weight: 400;
+    font-family: 'Anton', sans-serif;
     font-size: 32px;
-    line-height: 110%;
-    letter-spacing: 0.06em;
     color: #F1CDB3;
     display: block;
 }
 
 h2 {
-    font-family: 'Old Standard TT', serif;
-    font-style: normal;
-    font-weight: 400;
+    font-family: 'Goudy Bookletter 1911', serif;
     font-size: 44px;
-    line-height: 130%;
 }
 
 h3 {
-    font-family: 'Old Standard TT', serif;
-    font-style: normal;
-    font-weight: 400;
+    font-family: 'Goudy Bookletter 1911', serif;
     font-size: 35px;
-    line-height: 130%;
-    letter-spacing: 0.06em;
 }
 
 h4 {
-    font-family: 'Old Standard TT', serif;
-    font-style: normal;
-    font-weight: 400;
+    font-family: 'Goudy Bookletter 1911', serif;
     font-size: 20px;
-    line-height: 115%;
-    letter-spacing: 0.06em;
+    line-height: 130%;
+    letter-spacing: 0.01em;
 }
 
 .button {
@@ -107,15 +84,12 @@ h4 {
 }
 
 header {
-    height: 500px;
+    height: 400px;
     border-radius: 55px 55px 0 0;
     background-color: #f9f3ee;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 10;
 }
 
 nav {
@@ -147,7 +121,7 @@ header li {
 }
 
 .card-container {
-    padding: 40px;
+    padding: 40px 60px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -157,11 +131,21 @@ header li {
     width: 550px;
     height: 350px;
     background-color: #ffffff;
-    margin-bottom: 5px;
+    margin-bottom: 40px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     position: relative;
+}
+
+.card-content {
+    width: 40%;
+    height: 300px;
+    z-index: 2;
+}
+
+.card-content-image {
+    box-shadow: 5px 5px 8px rgb(159, 159, 168);
 }
 
 .card-button-show {
@@ -182,12 +166,31 @@ header li {
     background-color: #f9f3ee;
     top: 151px;
     left: -146px;
+    cursor: pointer;
 }
 
-.card-content {
-    width: 40%;
-    height: 300px;
-    z-index: 2;
+.card:hover .card-content-image {
+    box-shadow: 5px 5px 8px rgb(159, 159, 168), 10px 10px 4px rgb(218, 143, 143), 5px 15px 50px #e7cfaa;
+}
+
+.card-content-image:hover {
+    cursor: pointer;
+}
+
+.card-button-add {
+    width: 100%;
+    height: 50px;
+    margin-top: 50px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f9f3ee;
+    border-radius: 15px;
+}
+
+.card-button-add {
+    cursor: pointer;
 }
 
 footer {
