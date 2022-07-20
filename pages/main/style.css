@@ -1,0 +1,169 @@
+/* old-standard-tt-regular - latin - analog font for 'Georgia' */
+@font-face {
+    font-family: 'Old Standard TT';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+         url('../../assets/fonts/old-standard-tt-v18-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../../assets/fonts/old-standard-tt-v18-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* source-sans-pro-regular - latin - analog font for 'Arial' */
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+         url('../../assets/fonts/source-sans-pro-v21-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../../assets/fonts/source-sans-pro-v21-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* source-sans-pro-italic - latin */
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: italic;
+    font-weight: 400;
+    src: local(''),
+         url('../../assets/fonts/source-sans-pro-v21-latin-italic.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../../assets/fonts/source-sans-pro-v21-latin-italic.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* border-box model for all elements */
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    width: 100%;
+}
+
+.container_centered {
+    width: 1280px;
+    height: inherit;
+    margin: 0 auto;
+}
+
+section, footer {
+    min-width: 1280px;
+}
+.dark-section {
+    background: url("../../assets/images/gradient-noise.png"), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%, #211F20);
+}
+
+.white-section {
+    background: #FFFFFF;
+}
+
+.gray-section {
+    background: #F6F6F6;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+}
+
+#start-screen {
+    height: 908px;
+}
+
+header {
+    width: 1200px;
+    height: 60px;
+    position: relative;
+    top: 60px;
+    margin: 0 40px 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#logo {
+    width: 184px;
+    height: 60px;
+}
+
+h1 {
+    width: 190px;
+    height: 35px;
+    margin: 0;
+    font-family: 'Old Standard TT', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 110%;
+    letter-spacing: 0.06em;
+    color: #F1CDB3;
+    display: block;
+}
+
+h2 {
+    font-family: 'Old Standard TT', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 44px;
+    line-height: 130%;
+}
+
+h3 {
+    font-family: 'Old Standard TT', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 130%;
+    letter-spacing: 0.06em;
+}
+
+h4 {
+    font-family: 'Old Standard TT', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 115%;
+    letter-spacing: 0.06em;
+}
+
+.button {
+    transition-duration: 0.4s;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+nav {
+    width: 443px;
+    height: 27px;
+    padding: 0;
+    align-items: center;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header li {
+    display: flex;
+    align-items: center;
+}
+
+header a {
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-style: normal;
+    font-weigh
