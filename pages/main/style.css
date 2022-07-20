@@ -38,56 +38,24 @@ html {
     box-sizing: inherit;
 }
 
+/* ---------------------------------*/
+
 body {
     width: 100%;
+    background-color: #e7cfaa;
 }
 
 .container_centered {
     width: 1280px;
-    height: inherit;
-    margin: 0 auto;
-}
-
-section, footer {
     min-width: 1280px;
-}
-.dark-section {
-    background: url("../../assets/images/gradient-noise.png"), radial-gradient(110.67% 538.64% at 5.73% 50%, #513D2F 0%, #1A1A1C 100%, #211F20);
-}
-
-.white-section {
-    background: #FFFFFF;
-}
-
-.gray-section {
-    background: #F6F6F6;
+    margin: 40px auto;
 }
 
 img {
     width: 100%;
-    height: auto;
+    height: 100%;
     padding: 0;
     margin: 0;
-}
-
-#start-screen {
-    height: 908px;
-}
-
-header {
-    width: 1200px;
-    height: 60px;
-    position: relative;
-    top: 60px;
-    margin: 0 40px 0 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-#logo {
-    width: 184px;
-    height: 60px;
 }
 
 h1 {
@@ -138,6 +106,18 @@ h4 {
     cursor: pointer;
 }
 
+header {
+    height: 500px;
+    border-radius: 55px 55px 0 0;
+    background-color: #f9f3ee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
 nav {
     width: 443px;
     height: 27px;
@@ -160,10 +140,58 @@ header li {
     align-items: center;
 }
 
-header a {
-    text-decoration: none;
+.catalog {
+    background-color: #ffffff;
+    min-height: 500px;
+    margin: 0;
+}
+
+.card-container {
+    padding: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card {
+    width: 550px;
+    height: 350px;
+    background-color: #ffffff;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+
+.card-button-show {
+    width: 299px;
+    height: 50px;
+    padding: 15px;
+    transform: rotate(270deg);
+    position: absolute;
+    top: 151px;
+    left: -95px;
+    z-index: 1;
     text-align: center;
-    display: block;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-style: normal;
-    font-weigh
+    border-radius: 15px 15px 0 0;
+    transition-duration: 0.4s;
+}
+
+.card:hover .card-button-show {
+    background-color: #f9f3ee;
+    top: 151px;
+    left: -146px;
+}
+
+.card-content {
+    width: 40%;
+    height: 300px;
+    z-index: 2;
+}
+
+footer {
+    background-color: #ffffff;
+    min-height: 100px;
+    border-radius: 0 0 55px 55px;
+}
