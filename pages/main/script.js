@@ -1,68 +1,73 @@
+const createCompleteElement = function(type, className = '', innerHTML = '') {
+    const element = document.createElement(type);
+    if (className !== '')
+        {element.className = className};
+    if (innerHTML !== '')
+        {element.innerHTML = innerHTML};
+    return element;
+}
+
 const createHeader = function() {
-    let header = document.createElement('header');
-    let title = document.createElement('h1');
-    let logo = document.createElement('a');
-    let slogan = document.createElement('p');
-    header.className = 'header';
-    title.innerHTML = "Book Mood";
+    const header = createCompleteElement('header', 'header')
+    const title = createCompleteElement('h1', '', "Book Mood");
     title.hidden = true;
-    logo.className = 'logo-title';
+    const logoContent = '<div><p>b</p><p>m</p></div><div class="logo-title-central"><p>OO</p></div><div><p>k</p><p>d</p></div>';
+    const logo = createCompleteElement('a', 'logo-title', logoContent);
     logo.href = '';
-    logo.innerHTML = '<div><p>b</p><p>m</p></div><div class="logo-title-central"><p>OO</p></div><div><p>k</p><p>d</p></div>';
-    slogan.className = 'slogan';
-    slogan.innerHTML = '“Think before you speak. Read before you think.”'
+    const sloganContent = '“Think before you speak. Read before you think.”';
+    const slogan = createCompleteElement('p', 'slogan', sloganContent);
     header.append(title, logo, slogan);
     return header;
 }
 
+const createCartCard = function(book) {
+    let card = document.createElement('div');
+    let cardContent = document.createElement('div');
+    let cardImage = document.createElement('div');
+    let image = document.createElement('img');
+    let cardText = document.createElement('div');
+    let cardTitle = document.createElement('h5');
+    let cardAuthor = document.createElement('h6');
+    let summary = document.createElement('div');
+    let summaryContainer = document.createElement('div');
+    let summaryAmount = document.createElement('h6');
+    let summaryMultiplier = document.createElement('h6');
+    let summaryPrice = document.createElement('h6');
+    let summaryButton = document.createElement('div');
+
+    card.className = 'cart-card';
+    cardContent.className = 'cart-card-content';
+    cardImage.className = 'cart-card-image';
+    cardText.className = 'cart-card-text';
+    cardTitle.className = 'cart-card-title';
+    cardAuthor.className = 'cart-card-author';
+    summary.className = 'cart-card-summary';
+    summaryAmount.className = 'cart-card-summary-amount';
+    summaryMultiplier.className = 'cart-card-summary-multiplier';
+    summaryPrice.className = 'cart-card-summary-price';
+    summaryButton.className = 'cart-card-summary-button';
+
+    image.src = book.imageLink;
+    image.alt = 'book cover';
+    image.width = '320';
+    image.height = '460';
+    cardTitle.innerHTML = book.title;
+    cardAuthor.innerHTML = book.author;
+    summaryAmount.innerHTML = book.amount;
+    summaryMultiplier.innerHTML = 'x';
+    summaryPrice.innerHTML = book.price + '$';
+    summaryButton.innerHTML = '<span class="material-icons">delete_forever</span>';
+
+    cardImage.append(image);
+    cardText.append(cardTitle, cardAuthor);
+    summaryContainer.append(summaryAmount, summaryMultiplier, summaryPrice);
+    summary.append(summaryContainer, summaryButton);
+    cardContent.append(cardImage, cardText);
+    card.append(cardContent, summary);
+    return card;
+}
+
 const createCartSection = function(booksInCart) {
-    const createCartCard = function(book) {
-        let card = document.createElement('div');
-        let cardContent = document.createElement('div');
-        let cardImage = document.createElement('div');
-        let image = document.createElement('img');
-        let cardText = document.createElement('div');
-        let cardTitle = document.createElement('h5');
-        let cardAuthor = document.createElement('h6');
-        let summary = document.createElement('div');
-        let summaryContainer = document.createElement('div');
-        let summaryAmount = document.createElement('h6');
-        let summaryMultiplier = document.createElement('h6');
-        let summaryPrice = document.createElement('h6');
-        let summaryButton = document.createElement('div');
-
-        card.className = 'cart-card';
-        cardContent.className = 'cart-card-content';
-        cardImage.className = 'cart-card-image';
-        cardText.className = 'cart-card-text';
-        cardTitle.className = 'cart-card-title';
-        cardAuthor.className = 'cart-card-author';
-        summary.className = 'cart-card-summary';
-        summaryAmount.className = 'cart-card-summary-amount';
-        summaryMultiplier.className = 'cart-card-summary-multiplier';
-        summaryPrice.className = 'cart-card-summary-price';
-        summaryButton.className = 'cart-card-summary-button';
-
-        image.src = book.imageLink;
-        image.alt = 'book cover';
-        image.width = '320';
-        image.height = '460';
-        cardTitle.innerHTML = book.title;
-        cardAuthor.innerHTML = book.author;
-        summaryAmount.innerHTML = book.amount;
-        summaryMultiplier.innerHTML = 'x';
-        summaryPrice.innerHTML = book.price + '$';
-        summaryButton.innerHTML = '<span class="material-icons">delete_forever</span>';
-
-        cardImage.append(image);
-        cardText.append(cardTitle, cardAuthor);
-        summaryContainer.append(summaryAmount, summaryMultiplier, summaryPrice);
-        summary.append(summaryContainer, summaryButton);
-        cardContent.append(cardImage, cardText);
-        card.append(cardContent, summary);
-        return card;
-    }
-
     let cart = document.createElement('section');
     let slider = document.createElement('div');
     let cartConfirmButton = document.createElement('div');
@@ -86,44 +91,44 @@ const createCartSection = function(booksInCart) {
     return cart;
 }
 
-const createCatalogeSection = function(books) {
-    const createCatalogeCard = function(book) {
-        let card = document.createElement('div');
-        let cardButtonShow = document.createElement('div');
-        let cardButtonAdd = document.createElement('div');
-        let cardImage = document.createElement('div');
-        let image = document.createElement('img');
-        let cardText = document.createElement('div');
-        let cardTitle = document.createElement('h4');
-        let cardAuthor = document.createElement('h5');
-        let cardPrice = document.createElement('p');
+const createCatalogeCard = function(book) {
+    let card = document.createElement('div');
+    let cardButtonShow = document.createElement('div');
+    let cardButtonAdd = document.createElement('div');
+    let cardImage = document.createElement('div');
+    let image = document.createElement('img');
+    let cardText = document.createElement('div');
+    let cardTitle = document.createElement('h4');
+    let cardAuthor = document.createElement('h5');
+    let cardPrice = document.createElement('p');
 
-        card.className = 'card';
-        cardButtonShow.className = 'card-button-show';
-        cardButtonAdd.className = 'card-button-add';
-        cardImage.className = 'card-content card-content-image';
-        cardText.className = 'card-content card-content-text';
-        cardTitle.className = 'card-title';
-        cardAuthor.className = 'card-author';
-        cardPrice.className = 'card-price';
+    card.className = 'card';
+    cardButtonShow.className = 'card-button-show';
+    cardButtonAdd.className = 'card-button-add';
+    cardImage.className = 'card-content card-content-image';
+    cardText.className = 'card-content card-content-text';
+    cardTitle.className = 'card-title';
+    cardAuthor.className = 'card-author';
+    cardPrice.className = 'card-price';
 
-        image.src = book.imageLink;
-        image.alt = 'book cover'
-        image.width = '320';
-        image.height = '460';
+    image.src = book.imageLink;
+    image.alt = 'book cover'
+    image.width = '320';
+    image.height = '460';
 
-        cardButtonShow.innerHTML = 'Show More';
-        cardButtonAdd.innerHTML = 'Add to cart';
-        cardTitle.innerHTML = book.title;
-        cardAuthor.innerHTML = book.author;
-        cardPrice.innerHTML = '$' + book.price;
+    cardButtonShow.innerHTML = 'Show More';
+    cardButtonAdd.innerHTML = 'Add to cart';
+    cardTitle.innerHTML = book.title;
+    cardAuthor.innerHTML = book.author;
+    cardPrice.innerHTML = '$' + book.price;
 
-        cardImage.append(image);
-        cardText.append(cardTitle, cardAuthor, cardButtonAdd, cardPrice);
-        card.append(cardButtonShow, cardImage, cardText);
-        return card;
+    cardImage.append(image);
+    cardText.append(cardTitle, cardAuthor, cardButtonAdd, cardPrice);
+    card.append(cardButtonShow, cardImage, cardText);
+    return card;
     }
 
+const createCatalogeSection = function(books) {
     let cataloge = document.createElement('section');
     let cardContainer = document.createElement('div');
     cataloge.className = 'catalog';
@@ -148,12 +153,6 @@ const createFooter = function() {
     footer.innerHTML = '<a title="Me on GitHub" href="https://github.com/ExIxIxS"><svg id="github-logo" height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg><p class="foot-block">ExIxIxS</p></a><a href="https://rs.school/js-en/"><img id="rss-logo" src="../../assets/icons/rs_school_js.svg" alt="RSSchool logo" width="73" height="26"></a><p class="foot-block">© Denis Bondarenko 2022</p></a>';
     return footer;
 }
-
-/*
-        <footer>
-
-        </footer>
-*/
 
 const createCatalogePage = function(booksInCart) {
     let catalogePage = document.createElement('div');
@@ -247,6 +246,18 @@ const booksInCart = [{
         "description": "Secrets of the Javascript Ninja takes you on a journey towards mastering modern JavaScript development in three phases: design, construction, and maintenance. Written for JavaScript developers with intermediate-level skills, this book will give you the knowledge you need to create a cross-browser JavaScript library from the ground up.",
         "amount": 3
     }];
+
+    const getBooksFromJson = function(jsonLink) {
+        fetch(jsonLink) //path to the file with json data
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        });
+    }
+
+    const jsonBooks = getBooksFromJson('../../assets/json/books.json');
 
     const books = booksInCart;
 
