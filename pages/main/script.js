@@ -154,7 +154,7 @@ const createFooter = function() {
     return footer;
 }
 
-const createCatalogePage = function(booksInCart) {
+const createCatalogePage = function(books, booksInCart) {
     let catalogePage = document.createElement('div');
     catalogePage.className = 'container_centered';
     catalogePage.append(createHeader(), createMain([createCartSection(booksInCart), createCatalogeSection(books)]), createFooter());
@@ -165,7 +165,7 @@ const createCatalogePage = function(booksInCart) {
 const booksInCart = [];
 */
 
-
+/*
 const booksInCart = [{
         "author": "Douglas Crockford",
         "imageLink": "../../assets/images/js-good parts.jpg",
@@ -246,19 +246,21 @@ const booksInCart = [{
         "description": "Secrets of the Javascript Ninja takes you on a journey towards mastering modern JavaScript development in three phases: design, construction, and maintenance. Written for JavaScript developers with intermediate-level skills, this book will give you the knowledge you need to create a cross-browser JavaScript library from the ground up.",
         "amount": 3
     }];
+*/
 
-    const getBooksFromJson = function(jsonLink) {
-        fetch(jsonLink) //path to the file with json data
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            console.log(data);
-        });
-    }
+const getBooksFromJson = function(jsonLink) {
+    fetch(jsonLink) //path to the file with json data
+    .then(response => {
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        return data;
+    });
+}
 
-    const jsonBooks = getBooksFromJson('../../assets/json/books.json');
+const books = getBooksFromJson('../../assets/json/books.json');
 
-    const books = booksInCart;
+const booksInCart = [];
 
 document.body.prepend(createCatalogePage(books, booksInCart));
