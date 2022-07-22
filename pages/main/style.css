@@ -150,6 +150,10 @@ header {
     z-index: 10;
 }
 
+.cart[hidden] {
+    display: none;
+}
+
 .cart-slider {
     background-color: var(--color-background-main-3);
     width: 85%;
@@ -227,7 +231,7 @@ header {
     visibility: visible;
 }
 
-.cart-confirm {
+.cart-confirm-button {
     background-color: var(--color-background-main-3);
     width: 12%;
     height: 100%;
@@ -239,7 +243,7 @@ header {
     justify-content: space-between;
 }
 
-.cart-confirm .material-icons {
+.cart-confirm-button .material-icons {
     font-size: 36px;
 }
 
