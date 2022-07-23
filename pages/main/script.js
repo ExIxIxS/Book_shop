@@ -21,42 +21,23 @@ const createHeader = function() {
 }
 
 const createCartCard = function(book) {
-    let card = document.createElement('div');
-    let cardContent = document.createElement('div');
-    let cardImage = document.createElement('div');
-    let image = document.createElement('img');
-    let cardText = document.createElement('div');
-    let cardTitle = document.createElement('h5');
-    let cardAuthor = document.createElement('h6');
-    let summary = document.createElement('div');
-    let summaryContainer = document.createElement('div');
-    let summaryAmount = document.createElement('h6');
-    let summaryMultiplier = document.createElement('h6');
-    let summaryPrice = document.createElement('h6');
-    let summaryButton = document.createElement('div');
-
-    card.className = 'cart-card';
-    cardContent.className = 'cart-card-content';
-    cardImage.className = 'cart-card-image';
-    cardText.className = 'cart-card-text';
-    cardTitle.className = 'cart-card-title';
-    cardAuthor.className = 'cart-card-author';
-    summary.className = 'cart-card-summary';
-    summaryAmount.className = 'cart-card-summary-amount';
-    summaryMultiplier.className = 'cart-card-summary-multiplier';
-    summaryPrice.className = 'cart-card-summary-price';
-    summaryButton.className = 'cart-card-summary-button';
-
+    const card = createCompleteElement('div','cart-card');
+    const cardContent = createCompleteElement('div', 'cart-card-content');
+    const cardImage = createCompleteElement('div', 'cart-card-image');
+    const image = createCompleteElement('img', '');
     image.src = book.imageLink;
     image.alt = 'book cover';
     image.width = '320';
     image.height = '460';
-    cardTitle.innerHTML = book.title;
-    cardAuthor.innerHTML = book.author;
-    summaryAmount.innerHTML = book.amount;
-    summaryMultiplier.innerHTML = 'x';
-    summaryPrice.innerHTML = book.price + '$';
-    summaryButton.innerHTML = '<span class="material-icons">delete_forever</span>';
+    const cardText = createCompleteElement('div','cart-card-text');
+    const cardTitle = createCompleteElement('h5', 'cart-card-title', book.title);
+    const cardAuthor = createCompleteElement('h6', 'cart-card-author', book.author);
+    const summary = createCompleteElement('div', 'cart-card-summary');
+    const summaryContainer = createCompleteElement('div', '');
+    const summaryAmount = createCompleteElement('h6', 'cart-card-summary-amount', book.amount);
+    const summaryMultiplier = createCompleteElement('h6', 'cart-card-summary-multiplier', 'x');
+    const summaryPrice = createCompleteElement('h6', 'cart-card-summary-price', (book.price + '$'));
+    const summaryButton = createCompleteElement('div', 'cart-card-summary-button', '<span class="material-icons">delete_forever</span>');
 
     cardImage.append(image);
     cardText.append(cardTitle, cardAuthor);
@@ -68,14 +49,10 @@ const createCartCard = function(book) {
 }
 
 const createCartSection = function(booksInCart) {
-    let cart = document.createElement('section');
-    let slider = document.createElement('div');
-    let cartConfirmButton = document.createElement('div');
+    const cart = createCompleteElement('section', 'cart');
+    const slider = createCompleteElement('div', 'cart-slider');
+    const cartConfirmButton = createCompleteElement('div', 'cart-confirm-button');
     let totalPrice = 0;
-
-    cart.className = 'cart';
-    slider.className = 'cart-slider';
-    cartConfirmButton.className = 'cart-confirm-button';
 
     if (booksInCart.length === 0) {
         cart.hidden = true;
@@ -83,7 +60,7 @@ const createCartSection = function(booksInCart) {
         for (let book of booksInCart) {
         slider.append(createCartCard(book));
         totalPrice += book.amount * book.price;
-    }
+        }
     }
 
     cartConfirmButton.innerHTML = `<h3>${totalPrice}$</h3><div><span class="material-icons">shopping_cart_checkout</span></div>`;
@@ -92,35 +69,19 @@ const createCartSection = function(booksInCart) {
 }
 
 const createCatalogeCard = function(book) {
-    let card = document.createElement('div');
-    let cardButtonShow = document.createElement('div');
-    let cardButtonAdd = document.createElement('div');
-    let cardImage = document.createElement('div');
-    let image = document.createElement('img');
-    let cardText = document.createElement('div');
-    let cardTitle = document.createElement('h4');
-    let cardAuthor = document.createElement('h5');
-    let cardPrice = document.createElement('p');
-
-    card.className = 'card';
-    cardButtonShow.className = 'card-button-show';
-    cardButtonAdd.className = 'card-button-add';
-    cardImage.className = 'card-content card-content-image';
-    cardText.className = 'card-content card-content-text';
-    cardTitle.className = 'card-title';
-    cardAuthor.className = 'card-author';
-    cardPrice.className = 'card-price';
-
+    const card = createCompleteElement('div', 'card');
+    const cardButtonShow = createCompleteElement('div', 'card-button-show', 'Show More');
+    const cardButtonAdd = createCompleteElement('div', 'card-button-add', 'Add to cart');
+    const cardImage = createCompleteElement('div', 'card-content card-content-image');
+    const image = createCompleteElement('img', '');
     image.src = book.imageLink;
     image.alt = 'book cover'
     image.width = '320';
     image.height = '460';
-
-    cardButtonShow.innerHTML = 'Show More';
-    cardButtonAdd.innerHTML = 'Add to cart';
-    cardTitle.innerHTML = book.title;
-    cardAuthor.innerHTML = book.author;
-    cardPrice.innerHTML = '$' + book.price;
+    const cardText = createCompleteElement('div', 'card-content card-content-text');
+    const cardTitle = createCompleteElement('h4', 'card-title', book.title);
+    const cardAuthor = createCompleteElement('h5', 'card-author', book.author);
+    const cardPrice = createCompleteElement('p', 'card-price', ('$' + book.price));
 
     cardImage.append(image);
     cardText.append(cardTitle, cardAuthor, cardButtonAdd, cardPrice);
@@ -129,10 +90,8 @@ const createCatalogeCard = function(book) {
     }
 
 const createCatalogeSection = function(books) {
-    let cataloge = document.createElement('section');
-    let cardContainer = document.createElement('div');
-    cataloge.className = 'catalog';
-    cardContainer.className = 'card-container';
+    const cataloge = createCompleteElement('section', 'catalog');
+    const cardContainer = createCompleteElement('div', 'card-container');
 
     for (let book of books) {
         cardContainer.append(createCatalogeCard(book));
@@ -143,29 +102,23 @@ const createCatalogeSection = function(books) {
 }
 
 const createMain = function(content) {
-    let main = document.createElement('main');
+    const main = document.createElement('main');
     main.append(...content);
     return main;
 }
 
 const createFooter = function() {
-    const footer = document.createElement('footer');
-    footer.innerHTML = '<a title="Me on GitHub" href="https://github.com/ExIxIxS"><svg id="github-logo" height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg><p class="foot-block">ExIxIxS</p></a><a href="https://rs.school/js-en/"><img id="rss-logo" src="../../assets/icons/rs_school_js.svg" alt="RSSchool logo" width="73" height="26"></a><p class="foot-block">© Denis Bondarenko 2022</p></a>';
+    footerContent = '<a title="Me on GitHub" href="https://github.com/ExIxIxS"><svg id="github-logo" height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg><p class="foot-block">ExIxIxS</p></a><a href="https://rs.school/js-en/"><img id="rss-logo" src="../../assets/icons/rs_school_js.svg" alt="RSSchool logo" width="73" height="26"></a><p class="foot-block">© Denis Bondarenko 2022</p></a>';
+    const footer = createCompleteElement('footer', 'footer', footerContent);
     return footer;
 }
 
 const createCatalogePage = function(books, booksInCart) {
-    let catalogePage = document.createElement('div');
-    catalogePage.className = 'container_centered';
+    const catalogePage = createCompleteElement('div', 'container_centered');
     catalogePage.append(createHeader(), createMain([createCartSection(booksInCart), createCatalogeSection(books)]), createFooter());
     return catalogePage;
 }
 
-/*
-const booksInCart = [];
-*/
-
-/*
 const booksInCart = [{
         "author": "Douglas Crockford",
         "imageLink": "../../assets/images/js-good parts.jpg",
@@ -246,21 +199,16 @@ const booksInCart = [{
         "description": "Secrets of the Javascript Ninja takes you on a journey towards mastering modern JavaScript development in three phases: design, construction, and maintenance. Written for JavaScript developers with intermediate-level skills, this book will give you the knowledge you need to create a cross-browser JavaScript library from the ground up.",
         "amount": 3
     }];
-*/
 
-const getBooksFromJson = function(jsonLink) {
-    fetch(jsonLink) //path to the file with json data
-    .then(response => {
-        return response.json();
-    })
-    .then(data => {
-        console.log(data);
-        return data;
-    });
-}
+const books = [];
 
-const books = getBooksFromJson('../../assets/json/books.json');
-
-const booksInCart = [];
-
-document.body.prepend(createCatalogePage(books, booksInCart));
+fetch('../../assets/json/books.json') //path to the file with json data
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            data.forEach(element => {
+                books.push(element);
+            });
+            document.body.prepend(createCatalogePage(books, booksInCart));
+        });
