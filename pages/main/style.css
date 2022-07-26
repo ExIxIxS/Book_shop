@@ -295,7 +295,7 @@ header {
     z-index: 11;
     border-radius: 5vw;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .popup-image{
