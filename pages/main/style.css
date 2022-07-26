@@ -46,6 +46,7 @@ html {
     --color-background-main-1: #e7cfaa;
     --color-background-main-2: #f9f3ee;
     --color-background-main-3: #ffffff;
+    --color-background-popup-1: #e7cfaab7;
     --color-main-font-1: #d9aa63;
     --color-main-font-2: #2b1811;
 }
@@ -255,6 +256,73 @@ header {
     background-color: #ffffff;
     min-height: 500px;
     margin: 0;
+}
+
+.popup-body {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-background-popup-1);
+    z-index: 10;
+}
+
+.popup-button-close {
+    width: 5vw;
+    height: 5vw;
+    position: fixed;
+    top: 40vw;
+    left: 90vw;
+    z-index: 12;
+}
+
+.popup-button-close .material-icons {
+    font-size: 5vw;
+}
+
+.popup-button-close:hover {
+    cursor: pointer;
+}
+
+
+.popup-window {
+    width: 80vw;
+    height: 30vw;
+    margin: 10vw auto;
+    padding: 4vw;
+    background-color: var(--color-background-main-2);
+    z-index: 11;
+    border-radius: 5vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup-image{
+    width: 25%;
+    height: 100%;
+}
+
+.popup-content{
+    width: 65%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.popup-content h2{
+    font-size: 2.5vw;
+}
+
+.popup-content h3{
+    font-size: 1.8vw;
+    text-align: justify;
+}
+
+.popup-content h4{
+    font-size: 1vw;
+    text-align: right;
 }
 
 .card-container {
