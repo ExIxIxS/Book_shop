@@ -68,12 +68,12 @@ export const createCartSection = function(booksInCart) {
     return cart;
 }
 
-export const createCatalogeCard = function(book) {
+export const createCatalogCard = function(book) {
     const card = createCompleteElement('div', 'card');
     const cardButtonShow = createCompleteElement('div', 'card-button-show', 'Show More');
     const cardButtonAdd = createCompleteElement('div', 'card-button-add', 'Add to cart');
     const cardImage = createCompleteElement('div', 'card-content card-content-image');
-    const image = createCompleteElement('img', '');
+    const image = createCompleteElement('img', 'image');
     image.src = book.imageLink;
     image.alt = 'book cover'
     image.width = '320';
@@ -89,16 +89,16 @@ export const createCatalogeCard = function(book) {
     return card;
     }
 
-export const createCatalogeSection = function(books) {
-    const cataloge = createCompleteElement('section', 'catalog');
+export const createCatalogSection = function(books) {
+    const Catalog = createCompleteElement('section', 'catalog');
     const cardContainer = createCompleteElement('div', 'card-container');
 
     for (let book of books) {
-        cardContainer.append(createCatalogeCard(book));
+        cardContainer.append(createCatalogCard(book));
     }
 
-    cataloge.append(cardContainer);
-    return cataloge;
+    Catalog.append(cardContainer);
+    return Catalog;
 }
 
 export const createMain = function(content) {
@@ -113,8 +113,8 @@ export const createFooter = function() {
     return footer;
 }
 
-export const createCatalogePage = function(books, booksInCart) {
-    const catalogePage = createCompleteElement('div', 'container_centered');
-    catalogePage.append(createHeader(), createMain([createCartSection(booksInCart), createCatalogeSection(books)]), createFooter());
-    return catalogePage;
+export const createCatalogPage = function(books, booksInCart) {
+    const CatalogPage = createCompleteElement('div', 'container_centered');
+    CatalogPage.append(createHeader(), createMain([createCartSection(booksInCart), createCatalogSection(books)]), createFooter());
+    return CatalogPage;
 }
