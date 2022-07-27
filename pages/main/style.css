@@ -228,6 +228,10 @@ header {
     visibility: hidden;
 }
 
+.cart-card-summary-button .icon-delete:hover {
+    cursor: pointer;
+}
+
 .cart-card:hover .cart-card-summary-button {
     visibility: visible;
 }

@@ -46,7 +46,7 @@ const addBookToCart = function(book) {
             const cartCard = createCartCard(book);
             document.querySelector('.cart').hidden = false;
             document.querySelector('.cart-slider').append(cartCard);
-            let bookPrice = cartCard.querySelector('.cart-card-summary').firstElementChild.lastElementChild.innerHTML.slice(0,-1);
+            const bookPrice = cartCard.querySelector('.cart-card-summary').firstElementChild.lastElementChild.innerHTML.slice(0,-1);
             let currentTotalPriceElement = document.querySelector('.cart-confirm-button').firstElementChild;
             currentTotalPriceElement.innerHTML = Number(currentTotalPriceElement.innerHTML.slice(0,-1)) + Number(bookPrice) + '$';
 }
@@ -105,6 +105,21 @@ const catalogUserInteractive = function(event, booksArray) {
     }
 }
 
+const cartUserInteractive = function(event) {
+    switch (event.target.className) {
+    // click on the button 'Delete from cart'
+    case ('material-icons icon-delete'):
+        const cartCard = event.target.parentElement.parentElement.parentElement;
+        const bookAmount = cartCard.querySelector('.cart-card-summary').firstElementChild.firstElementChild.innerHTML;
+        const bookPrice = cartCard.querySelector('.cart-card-summary').firstElementChild.lastElementChild.innerHTML.slice(0,-1);
+        const totalBookPrice = bookPrice * bookAmount;
+        let currentTotalPriceElement = document.querySelector('.cart-confirm-button').firstElementChild;
+        currentTotalPriceElement.innerHTML = Number(currentTotalPriceElement.innerHTML.slice(0,-1)) - totalBookPrice  + '$';
+        cartCard.remove();
+        break;
+    }
+}
+
 fetch('../../assets/json/books.json') //path to the file with json data
         .then(response => {
             return response.json();
@@ -112,4 +127,5 @@ fetch('../../assets/json/books.json') //path to the file with json data
         .then(books => {
             document.body.prepend(createCatalogPage(books, booksInCart));
             document.querySelector(".catalog").addEventListener("click", event => catalogUserInteractive(event, books));
+            document.querySelector(".cart").addEventListener("click", event => cartUserInteractive(event));
         });

@@ -37,7 +37,7 @@ export const createCartCard = function(book) {
     const summaryAmount = createCompleteElement('h6', 'cart-card-summary-amount', book.amount);
     const summaryMultiplier = createCompleteElement('h6', 'cart-card-summary-multiplier', 'x');
     const summaryPrice = createCompleteElement('h6', 'cart-card-summary-price', (book.price + '$'));
-    const summaryButton = createCompleteElement('div', 'cart-card-summary-button', '<span class="material-icons">delete_forever</span>');
+    const summaryButton = createCompleteElement('div', 'cart-card-summary-button', '<span class="material-icons icon-delete" title="Delete from cart">delete_forever</span>');
 
     cardImage.append(image);
     cardText.append(cardTitle, cardAuthor);
