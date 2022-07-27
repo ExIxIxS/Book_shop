@@ -9,7 +9,7 @@ import {createCompleteElement,
         createCatalogPage
 } from '../../assets/js/create.js';
 
-const booksInCart = [];
+const booksInCart = JSON.parse(localStorage.getItem('booksInCart')) || [];
 
 const ifBookInCart = function(bookTitle) {
     for (let cartCard of document.querySelector(".cart-slider").children) {
@@ -28,42 +28,62 @@ const increaseBookAmount = function(bookTitle) {
             let bookPrice = cartCard.querySelector('.cart-card-summary').firstElementChild.lastElementChild.innerHTML.slice(0,-1);
             let currentTotalPriceElement = document.querySelector('.cart-confirm-button').firstElementChild;
             currentTotalPriceElement.innerHTML = Number(currentTotalPriceElement.innerHTML.slice(0,-1)) + Number(bookPrice) + '$';
-        }
-    }
-    return false;
-}
-
-const getBookFromArray = function(bookTitle, booksArray) {
-    for (let book of booksArray) {
-        if (bookTitle === book.title) {
-            return book;
+            //work with Array booksInCart
+            const booksInCart = JSON.parse(localStorage.getItem('booksInCart'));
+            increaseBookAmountInArray(bookTitle, booksInCart);
+            localStorage.setItem('booksInCart', JSON.stringify(booksInCart));
         }
     }
 }
 
-const addBookToCart = function(book) {
-            book.amount = 1;
-            const cartCard = createCartCard(book);
-            document.querySelector('.cart').hidden = false;
-            document.querySelector('.cart-slider').append(cartCard);
-            const bookPrice = cartCard.querySelector('.cart-card-summary').firstElementChild.lastElementChild.innerHTML.slice(0,-1);
-            let currentTotalPriceElement = document.querySelector('.cart-confirm-button').firstElementChild;
-            currentTotalPriceElement.innerHTML = Number(currentTotalPriceElement.innerHTML.slice(0,-1)) + Number(bookPrice) + '$';
+const getBookFromArray = function(bookTitleString, booksArray) {
+    for (let bookObj of booksArray) {
+        if (bookTitleString === bookObj.title) {
+            return bookObj;
+        }
+    }
 }
 
-const createAndAddPopup = function(book) {
+const increaseBookAmountInArray = function(bookTitleString, booksArray) {
+    for (let bookObj of booksArray) {
+        if (bookTitleString === bookObj.title) {
+            bookObj.amount += 1;
+        }
+    }
+}
+
+const deleteBookfromArray = function(bookTitleString, booksArray) {
+    const modifiedArray = booksArray.filter(bookObj => bookObj.title !== bookTitleString);
+    return modifiedArray;
+}
+
+const addBookToCart = function(bookObj) {
+    bookObj.amount = 1;
+    const cartCard = createCartCard(bookObj);
+    document.querySelector('.cart').hidden = false;
+    document.querySelector('.cart-slider').append(cartCard);
+    const bookPrice = cartCard.querySelector('.cart-card-summary').firstElementChild.lastElementChild.innerHTML.slice(0,-1);
+    let currentTotalPriceElement = document.querySelector('.cart-confirm-button').firstElementChild;
+    currentTotalPriceElement.innerHTML = Number(currentTotalPriceElement.innerHTML.slice(0,-1)) + Number(bookPrice) + '$';
+    //work with Array booksInCart
+    const booksInCart = JSON.parse(localStorage.getItem('booksInCart'));
+    booksInCart.push(bookObj);
+    localStorage.setItem('booksInCart', JSON.stringify(booksInCart));
+}
+
+const createAndAddPopup = function(bookObj) {
     const popup = createCompleteElement('div', 'popup-body');
     const popupWindow = createCompleteElement('div', 'popup-window');
     const popupImage = createCompleteElement('div', 'popup-image');
     const image = createCompleteElement('img', 'image');
-    image.src = book.imageLink;
+    image.src = bookObj.imageLink;
     image.alt = 'book cover'
     image.width = '320';
     image.height = '460';
     const popupContent = createCompleteElement('div', 'popup-content');
-    const popupTitle = createCompleteElement('h2', 'popup-title', book.title);
-    const popupDescription = createCompleteElement('h3', 'popup-description', book.description);
-    const popupAuthor = createCompleteElement('h4', 'popup-author', book.author);
+    const popupTitle = createCompleteElement('h2', 'popup-title', bookObj.title);
+    const popupDescription = createCompleteElement('h3', 'popup-description', bookObj.description);
+    const popupAuthor = createCompleteElement('h4', 'popup-author', bookObj.author);
     const popupButton = createCompleteElement('div', 'popup-button-close', '<span class="material-icons icon-close" title="Close">cancel</span>');
     popupContent.append(popupTitle, popupDescription, popupAuthor);
     popupImage.append(image);
@@ -74,29 +94,29 @@ const createAndAddPopup = function(book) {
 
 const catalogUserInteractive = function(event, booksArray) {
     let cardElement;
-    let book;
+    let bookObj;
     switch (event.target.className) {
     // click on button 'add book to cart'
     case 'card-button-add':
         cardElement = event.target.parentElement.parentElement;
-        book = getBookFromArray(cardElement.querySelector('.card-title').innerHTML, booksArray);
-        if (ifBookInCart(book.title)) {
-            increaseBookAmount(book.title);
+        bookObj = getBookFromArray(cardElement.querySelector('.card-title').innerHTML, booksArray);
+        if (ifBookInCart(bookObj.title)) {
+            increaseBookAmount(bookObj.title);
         } else {
-            addBookToCart(book);
+            addBookToCart(bookObj);
         };
         break;
     // click on the button 'Show more'
     case ('card-button-show'):
         cardElement = event.target.parentElement;
-        book = getBookFromArray(cardElement.querySelector('.card-title').innerHTML, booksArray);
-        createAndAddPopup(book);
+        bookObj = getBookFromArray(cardElement.querySelector('.card-title').innerHTML, booksArray);
+        createAndAddPopup(bookObj);
         break;
     // click on the image
     case ('image'):
         cardElement = event.target.parentElement.parentElement;
-        book = getBookFromArray(cardElement.querySelector('.card-title').innerHTML, booksArray);
-        createAndAddPopup(book);
+        bookObj = getBookFromArray(cardElement.querySelector('.card-title').innerHTML, booksArray);
+        createAndAddPopup(bookObj);
         break;
     // click on the button 'Close PopUp'
     case ('material-icons icon-close'):
@@ -116,6 +136,10 @@ const cartUserInteractive = function(event) {
         let currentTotalPriceElement = document.querySelector('.cart-confirm-button').firstElementChild;
         currentTotalPriceElement.innerHTML = Number(currentTotalPriceElement.innerHTML.slice(0,-1)) - totalBookPrice  + '$';
         cartCard.remove();
+        //work with Array booksInCart
+        const bookTitle = cartCard.querySelector('.cart-card-title').innerHTML;
+        const booksInCart = JSON.parse(localStorage.getItem('booksInCart'));
+        localStorage.setItem('booksInCart', JSON.stringify(deleteBookfromArray(bookTitle, booksInCart)));
         break;
     }
 }

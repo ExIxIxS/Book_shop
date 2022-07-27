@@ -51,7 +51,8 @@ export const createCartCard = function(book) {
 export const createCartSection = function(booksInCart) {
     const cart = createCompleteElement('section', 'cart');
     const slider = createCompleteElement('div', 'cart-slider');
-    const cartConfirmButton = createCompleteElement('div', 'cart-confirm-button');
+    const cartConfirmButton = createCompleteElement('a', 'cart-confirm-button');
+
     let totalPrice = 0;
 
     if (booksInCart.length === 0) {
@@ -63,6 +64,7 @@ export const createCartSection = function(booksInCart) {
         }
     }
 
+    cartConfirmButton.href = '../form/index.html';
     cartConfirmButton.innerHTML = `<h3>${totalPrice}$</h3><div><span class="material-icons">shopping_cart_checkout</span></div>`;
     cart.append(slider, cartConfirmButton);
     return cart;
