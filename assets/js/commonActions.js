@@ -1,4 +1,4 @@
-import {createCartCard,
+import {createCartCard
 } from './create.js';
 
 export const ifBookInCart = function(bookTitle) {
@@ -59,4 +59,13 @@ export const addBookToCart = function(bookObj) {
     const booksInCart = JSON.parse(localStorage.getItem('booksInCart'));
     booksInCart.push(bookObj);
     localStorage.setItem('booksInCart', JSON.stringify(booksInCart));
+}
+
+export const booksInCart = function() {
+    //initialize Local Storage
+    const booksInCartArray = JSON.parse(localStorage.getItem('booksInCart')) ?? [];
+        if (booksInCartArray.length === 0) {
+            localStorage.setItem('booksInCart', JSON.stringify(booksInCartArray));
+        }
+    return booksInCartArray;
 }
