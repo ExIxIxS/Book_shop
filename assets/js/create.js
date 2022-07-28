@@ -13,7 +13,7 @@ export const createHeader = function() {
     title.hidden = true;
     const LOGOCONTENT = '<div><p>b</p><p>m</p></div><div class="logo-title-central"><p>OO</p></div><div><p>k</p><p>d</p></div>';
     const logo = createCompleteElement('a', 'logo-title', LOGOCONTENT);
-    logo.href = '';
+    logo.href = 'https://ExIxIxS.github.io/book_shop/pages/main/';
     const sloganContent = '“Think before you speak. Read before you think.”';
     const slogan = createCompleteElement('p', 'slogan', sloganContent);
     header.append(title, logo, slogan);
