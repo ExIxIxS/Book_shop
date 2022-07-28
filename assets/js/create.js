@@ -121,3 +121,24 @@ export const createCatalogPage = function(books, booksInCart) {
     CatalogPage.append(createHeader(), createMain([createCartSection(booksInCart), createCatalogSection(books)]), createFooter());
     return CatalogPage;
 }
+
+export const createAndAddPopup = function(bookObj) {
+    const popup = createCompleteElement('div', 'popup-body');
+    const popupWindow = createCompleteElement('div', 'popup-window');
+    const popupImage = createCompleteElement('div', 'popup-image');
+    const image = createCompleteElement('img', 'image');
+    image.src = bookObj.imageLink;
+    image.alt = 'book cover'
+    image.width = '320';
+    image.height = '460';
+    const popupContent = createCompleteElement('div', 'popup-content');
+    const popupTitle = createCompleteElement('h2', 'popup-title', bookObj.title);
+    const popupDescription = createCompleteElement('h3', 'popup-description', bookObj.description);
+    const popupAuthor = createCompleteElement('h4', 'popup-author', bookObj.author);
+    const popupButton = createCompleteElement('div', 'popup-button-close', '<span class="material-icons icon-close" title="Close">cancel</span>');
+    popupContent.append(popupTitle, popupDescription, popupAuthor);
+    popupImage.append(image);
+    popupWindow.append(popupImage, popupContent);
+    popup.append(popupWindow, popupButton);
+    document.querySelector('.catalog').prepend(popup);
+}
