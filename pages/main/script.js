@@ -12,7 +12,7 @@ import {createCompleteElement,
 const booksInCart = JSON.parse(localStorage.getItem('booksInCart')) || [];
 
 const ifBookInCart = function(bookTitle) {
-    for (let cartCard of document.querySelector(".cart-slider").children) {
+    for (let cartCard of document.querySelector('.cart-slider').children) {
         if (bookTitle === cartCard.querySelector('.cart-card-title').innerHTML) {
             return true;
         }
@@ -144,12 +144,41 @@ const cartUserInteractive = function(event) {
     }
 }
 
+const dragAndDropToCart = function(event, booksArray) {
+    if (event.target.className !== 'image draggable') {
+        return;
+    }
+    const cardElement = event.target.parentElement.parentElement;
+    const bookTitle = cardElement.querySelector('.card-title').innerHTML;
+    const dropZone = document.querySelector('.dropzone');
+
+    dropZone.addEventListener('dragover', (event) => {
+        // prevent default to allow drop
+        event.preventDefault();
+    });
+    let i = 1
+    const bookObj = getBookFromArray(bookTitle, booksArray);
+    const drop = function(event) {
+        // prevent default action (open as link for some elements)
+        event.preventDefault();
+        // move dragged element to the selected drop target
+        if (ifBookInCart(bookObj.title)) {
+            increaseBookAmount(bookObj.title);
+        } else {
+            addBookToCart(bookObj);
+        };
+       dropZone.removeEventListener('drop', drop);
+    }
+    dropZone.addEventListener('drop', drop);
+}
+
 fetch('../../assets/json/books.json') //path to the file with json data
         .then(response => {
             return response.json();
         })
         .then(books => {
             document.body.prepend(createCatalogPage(books, booksInCart));
-            document.querySelector(".catalog").addEventListener("click", event => catalogUserInteractive(event, books));
-            document.querySelector(".cart").addEventListener("click", event => cartUserInteractive(event));
+            document.querySelector('.catalog').addEventListener('click', event => catalogUserInteractive(event, books));
+            document.querySelector('.cart').addEventListener('click', event => cartUserInteractive(event));
+            document.querySelector('.catalog').addEventListener('dragstart', event => dragAndDropToCart(event, books));
         });

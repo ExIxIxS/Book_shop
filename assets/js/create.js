@@ -24,7 +24,7 @@ export const createCartCard = function(book) {
     const card = createCompleteElement('div','cart-card');
     const cardContent = createCompleteElement('div', 'cart-card-content');
     const cardImage = createCompleteElement('div', 'cart-card-image');
-    const image = createCompleteElement('img', '');
+    const image = createCompleteElement('img', 'image');
     image.src = book.imageLink;
     image.alt = 'book cover';
     image.width = '320';
@@ -50,7 +50,7 @@ export const createCartCard = function(book) {
 
 export const createCartSection = function(booksInCart) {
     const cart = createCompleteElement('section', 'cart');
-    const slider = createCompleteElement('div', 'cart-slider');
+    const slider = createCompleteElement('div', 'cart-slider dropzone');
     const cartConfirmButton = createCompleteElement('a', 'cart-confirm-button');
 
     let totalPrice = 0;
@@ -58,9 +58,9 @@ export const createCartSection = function(booksInCart) {
     if (booksInCart.length === 0) {
         cart.hidden = true;
     } else {
-        for (let book of booksInCart) {
-        slider.append(createCartCard(book));
-        totalPrice += book.amount * book.price;
+        for (let bookObj of booksInCart) {
+        slider.append(createCartCard(bookObj));
+        totalPrice += bookObj.amount * bookObj.price;
         }
     }
 
@@ -75,11 +75,12 @@ export const createCatalogCard = function(book) {
     const cardButtonShow = createCompleteElement('div', 'card-button-show', 'Show More');
     const cardButtonAdd = createCompleteElement('div', 'card-button-add', 'Add to cart');
     const cardImage = createCompleteElement('div', 'card-content card-content-image');
-    const image = createCompleteElement('img', 'image');
+    const image = createCompleteElement('img', 'image draggable');
     image.src = book.imageLink;
     image.alt = 'book cover'
     image.width = '320';
     image.height = '460';
+    image.draggable='true';
     const cardText = createCompleteElement('div', 'card-content card-content-text');
     const cardTitle = createCompleteElement('h4', 'card-title', book.title);
     const cardAuthor = createCompleteElement('h5', 'card-author', book.author);
