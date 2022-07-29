@@ -14,8 +14,61 @@
     <div class="container_centered">
         <main>
             <section class="user-form-section">
-                <form>
-                It`s a big form HERE.
+                <form method="post">
+                    <legends class="form-legends">Please fill the following purchase order form:</legends>
+                    <fieldset class="personal-data">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required autofocus minlength="4">
+
+                        <label for="surname">Surname:</label>
+                        <input type="text" class="invalid" id="surname" name="surname" required minlength="5">
+                        <span class="invalid-message" title="Please check and enter valid data">* The field is invalid</span>
+                    </fieldset>
+                    <fieldset class="personal-data">
+                        <legend>Delivery information:</legend>
+                        <label for="street">Street:</label>
+                        <input type="text" id="street" name="street" required minlength="5">
+
+                        <label for="house-number">House number:</label>
+                        <input type="number" id="house-number" name="house-number" required min="1">
+
+                        <label for="flat-number">Flat number:</label>
+                        <input type="text" id="flat-number" name="flat-number" required>
+
+                        <label for="date-delivery">Delivery date:</label>
+                        <input type="date" id="date-delivery" name="date-delivery" required min="2022-08-01">
+                    </fieldset>
+                    <fieldset>
+                        <legend>Please choose payment method:</legend>
+                        <div>
+                            <input type="radio" id="cash" name="payment" value="cash" required>
+                            <label for="huey">Cash</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="card" name="payment" value="card" required>
+                            <label for="card">Card</label>
+                          </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Choose your gifts (2 items):</legend>
+                        <div>
+                          <input type="checkbox" class="check-mark" id="pack" name="gifts" value="pack">
+                          <label for="pack">Pack as a gift</label>
+                        </div>
+                        <div>
+                          <input type="checkbox" id="postcard" name="gifts" value="postcard">
+                          <label for="postcard">Add postcard</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="discount" name="gifts" value="discount">
+                            <label for="discount">Provide 2% discount to the next time</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="pen" name="gifts" value="pen">
+                            <label for="pen">Branded pen or pencil</label>
+                          </div>
+                      </fieldset>
+                    <button type="submit" class="form-button" title="Please check and fill required fields" disabled>Confirm</button>
                 </form>
             </section>
         </main>

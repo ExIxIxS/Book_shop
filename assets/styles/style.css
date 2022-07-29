@@ -462,7 +462,80 @@ p.foot-block {
 /* --- User Form Styling ---*/
 
 .user-form-section {
-    background-color: var(--color-background-main-3);
     min-height: 500px;
     margin: 0;
+    padding: 40px 200px;
+    background-color: var(--color-background-main-3);
+}
+
+form {
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-legends {
+    font-size: 34px;
+    margin: 0 0 20px 0;
+}
+
+fieldset {
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 2px solid var(--color-background-main-1);
+    margin: 10px 0;
+}
+
+input {
+    margin: 10px 0;
+    border-width: 3px;
+    color: var(--color-main-font-1);
+    border-color: var(--color-background-main-1);
+}
+
+.personal-data input {
+    width: 50%;
+    height: 40px;
+    padding: 0 5px 0 15px;
+    border-radius: 15px;
+}
+
+.invalid {
+    color: #ff0000;
+    border-color: #ff0000;
+    background-color:var(--color-background-main-2);
+}
+
+.invalid-message {
+    color: #ff0000;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+legends {
+    text-align: center;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    width: 20px;
+    height: 20px;
+}
+
+.form-button {
+    height: 50px;
+    margin: 20px 60px;
+    font-size: 30px;
+    color: var(--color-main-font-1);
+    border-radius: 16px;
+    border: 2px solid var(--color-background-main-1);
+    box-shadow: none;
+    background-color: var(--color-background-main-2);
+}
+
+.form-button:disabled {
+    border: 1px solid var(--color-background-main-1);
+    background-color: #ececec;
+    box-shadow: none;
 }
