@@ -536,7 +536,8 @@ input[type="checkbox"], input[type="radio"] {
 }
 
 .form-button:disabled {
-    border: 1px solid var(--color-background-main-1);
+    border: 1px solid var(--color-background-main-3);
+    color: var(--color-background-main-3);
     background-color: #ececec;
     box-shadow: none;
 }
