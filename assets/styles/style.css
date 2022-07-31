@@ -103,6 +103,11 @@ h4 {
     letter-spacing: 0.01em;
 }
 
+a {
+    text-decoration: none;
+    color: var(--color-main-font-1);
+}
+
 .button {
     transition-duration: 0.4s;
 }
@@ -141,14 +146,14 @@ header {
 
 .cart {
     background-color: var(--color-background-main-2);
-    height: 140px;
+    height: 160px;
     padding: 20px 60px;
     position: sticky;
     top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 10;
+    z-index: 8;
 }
 
 .cart[hidden] {
@@ -159,6 +164,8 @@ header {
     background-color: var(--color-background-main-3);
     width: 85%;
     height: 100%;
+    padding: 10px 10px 0 10px;
+    border-radius: 10px;
     display: flex;
     color: var(--color-main-font-2);
     overflow-x: auto;
@@ -239,7 +246,7 @@ header {
 .cart-confirm-button {
     background-color: var(--color-background-main-3);
     width: 12%;
-    height: 100%;
+    height: 80%;
     padding: 10px;
     border-radius: 55px;
     display: flex;
@@ -257,7 +264,7 @@ header {
 }
 
 .catalog {
-    background-color: #ffffff;
+    background-color: var(--color-background-main-3);
     min-height: 500px;
     margin: 0;
 }
@@ -269,7 +276,7 @@ header {
     width: 100%;
     height: 100vh;
     background-color: var(--color-background-popup-1);
-    z-index: 10;
+    z-index: 9;
 }
 
 .popup-button-close {
@@ -278,7 +285,7 @@ header {
     position: fixed;
     top: 40vw;
     left: 90vw;
-    z-index: 12;
+    z-index: 10;
 }
 
 .popup-button-close .material-icons {
@@ -296,7 +303,7 @@ header {
     margin: 10vw auto;
     padding: 4vw;
     background-color: var(--color-background-main-2);
-    z-index: 11;
+    z-index: 10;
     border-radius: 5vw;
     display: flex;
     justify-content: space-around;
@@ -422,7 +429,7 @@ header {
 }
 
 footer {
-    background-color: #ffffff;
+    background-color: var(--color-background-main-3);
     min-height: 100px;
     border-radius: 0 0 55px 55px;
     padding: 0 60px;
@@ -457,4 +464,183 @@ footer a {
 
 p.foot-block {
     display: inline-block;
+}
+
+/* --- User Form Styling ---*/
+
+.user-form-section {
+    min-height: 500px;
+    margin: 0;
+    padding: 40px 200px;
+    background-color: var(--color-background-main-3);
+}
+
+form {
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-legends {
+    font-size: 34px;
+    margin: 0 0 20px 0;
+}
+
+fieldset {
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 2px solid var(--color-background-main-1);
+    margin: 10px 0;
+}
+
+input {
+    margin: 10px 0;
+    border-width: 3px;
+    color: var(--color-main-font-1);
+    border-color: var(--color-background-main-1);
+}
+
+.personal-data input {
+    width: 50%;
+    height: 40px;
+    padding: 0 5px 0 15px;
+    border-radius: 15px;
+}
+
+.invalid {
+    color: #ff0000;
+    border-color: #ff0000;
+    background-color:var(--color-background-main-2);
+}
+
+.invalid-message {
+    margin-bottom: 15px;
+    color: #ff0000;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+legends {
+    text-align: center;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    width: 20px;
+    height: 20px;
+}
+
+.form-submit-botton {
+    height: 50px;
+    margin: 20px 60px;
+    font-size: 30px;
+    color: var(--color-main-font-1);
+    border-radius: 16px;
+    border: 2px solid var(--color-background-main-1);
+    box-shadow: none;
+    background-color: var(--color-background-main-2);
+    cursor: pointer;
+}
+
+.form-submit-botton:disabled {
+    border: 1px solid var(--color-background-main-3);
+    color: var(--color-background-main-3);
+    background-color: #ececec;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* Confirm popup window Styling*/
+
+.popup-confirm-window {
+    width: 80vw;
+    min-height: 40vw;
+    margin: 5vw auto;
+    padding: 4vw;
+    background-color: var(--color-background-main-2);
+    z-index: 10;
+    border-radius: 5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popup-confirm-content {
+    width: 90%;
+    margin: 2.5vw 0;
+    padding: 1% 5%;
+    background-color: var(--color-background-main-3);
+    border-radius: 5vw;
+}
+
+.popup-confirm-content h2 {
+    margin-bottom: 4vw;
+    text-align: center;
+}
+
+.popup-confirm-content h3 {
+    margin: 2vw 0 1vw 0;
+    font-family: 'Anton', sans-serif;
+    text-align: center;
+}
+
+.popup-confirm-content h4 {
+    margin: 1vw 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.confirm-slider {
+    width: 100%;
+}
+
+.confirm-cart-card {
+    width: 20%;
+    min-width: 20%;
+}
+
+.popup-button {
+    width: 8vw;
+    height: 3vw;
+    background-color: var(--color-background-main-2);
+    font-size: 2.5vw;
+    color: var(--color-main-font-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color-main-font-1);
+    border-radius: 16px;
+}
+
+.popup-button:hover {
+    cursor: pointer;
+}
+
+.popup-button:active {
+    background-color: var(--color-background-main-1);
+}
+
+/* Confirm message popup window Styling*/
+.popup-message-window {
+    width: 80vw;
+    min-height: 20vw;
+    margin: 5vw auto;
+    padding: 4vw;
+    background-color: var(--color-background-main-2);
+    z-index: 10;
+    border-radius: 5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popup-message-content {
+    width: 90%;
+    margin: 2.5vw 0;
+    padding: 1% 5%;
+    background-color: var(--color-background-main-3);
+    border-radius: 5vw;
+    text-align: center;
 }

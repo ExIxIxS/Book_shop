@@ -1,3 +1,6 @@
+import {getFormData
+} from './form.js';
+
 export const createCompleteElement = function(type, className = '', innerHTML = '') {
     const element = document.createElement(type);
     if (className !== '')
@@ -20,54 +23,91 @@ export const createHeader = function() {
     return header;
 }
 
-export const createCartCard = function(book) {
+export const createCartCard = function(bookObj) {
     const card = createCompleteElement('div','cart-card');
     const cardContent = createCompleteElement('div', 'cart-card-content');
     const cardImage = createCompleteElement('div', 'cart-card-image');
     const image = createCompleteElement('img', 'image');
-    image.src = book.imageLink;
+    image.src = bookObj.imageLink;
     image.alt = 'book cover';
     image.width = '320';
     image.height = '460';
     const cardText = createCompleteElement('div','cart-card-text');
-    const cardTitle = createCompleteElement('h5', 'cart-card-title', book.title);
-    const cardAuthor = createCompleteElement('h6', 'cart-card-author', book.author);
+    const cardTitle = createCompleteElement('h5', 'cart-card-title', bookObj.title);
+    const cardAuthor = createCompleteElement('h6', 'cart-card-author', bookObj.author);
     const summary = createCompleteElement('div', 'cart-card-summary');
     const summaryContainer = createCompleteElement('div', '');
-    const summaryAmount = createCompleteElement('h6', 'cart-card-summary-amount', book.amount);
+    const summaryAmount = createCompleteElement('h6', 'cart-card-summary-amount', bookObj.amount);
     const summaryMultiplier = createCompleteElement('h6', 'cart-card-summary-multiplier', 'x');
-    const summaryPrice = createCompleteElement('h6', 'cart-card-summary-price', (book.price + '$'));
-    const summaryButton = createCompleteElement('div', 'cart-card-summary-button', '<span class="material-icons icon-delete" title="Delete from cart">delete_forever</span>');
+    const summaryPrice = createCompleteElement('h6', 'cart-card-summary-price', (bookObj.price + '$'));
+    const deleteButton = createCompleteElement('div', 'cart-card-summary-button', '<span class="material-icons icon-delete" title="Delete from cart">delete_forever</span>');
 
     cardImage.append(image);
     cardText.append(cardTitle, cardAuthor);
     summaryContainer.append(summaryAmount, summaryMultiplier, summaryPrice);
-    summary.append(summaryContainer, summaryButton);
+    summary.append(summaryContainer, deleteButton);
     cardContent.append(cardImage, cardText);
     card.append(cardContent, summary);
     return card;
 }
 
-export const createCartSection = function(booksInCart) {
+export const createCardConfirmPopup = function(bookObj) {
+    const card = createCompleteElement('div','cart-card confirm-cart-card');
+    const cardContent = createCompleteElement('div', 'cart-card-content');
+    const cardImage = createCompleteElement('div', 'cart-card-image');
+    const image = createCompleteElement('img', 'image');
+    image.src = bookObj.imageLink;
+    image.alt = 'book cover';
+    image.width = '320';
+    image.height = '460';
+    const cardText = createCompleteElement('div','cart-card-text');
+    const cardTitle = createCompleteElement('h5', 'cart-card-title', bookObj.title);
+    const cardAuthor = createCompleteElement('h6', 'cart-card-author', bookObj.author);
+    const summary = createCompleteElement('div', 'cart-card-summary');
+    const summaryContainer = createCompleteElement('div', '');
+    const summaryAmount = createCompleteElement('h6', 'cart-card-summary-amount', bookObj.amount);
+    const summaryMultiplier = createCompleteElement('h6', 'cart-card-summary-multiplier', 'x');
+    const summaryPrice = createCompleteElement('h6', 'cart-card-summary-price', (bookObj.price + '$'));
+
+    cardImage.append(image);
+    cardText.append(cardTitle, cardAuthor);
+    summaryContainer.append(summaryAmount, summaryMultiplier, summaryPrice);
+    summary.append(summaryContainer);
+    cardContent.append(cardImage, cardText);
+    card.append(cardContent, summary);
+    return card;
+}
+
+export const createCartSection = function(booksInCartArray) {
     const cart = createCompleteElement('section', 'cart');
     const slider = createCompleteElement('div', 'cart-slider dropzone');
     const cartConfirmButton = createCompleteElement('a', 'cart-confirm-button');
 
     let totalPrice = 0;
 
-    if (booksInCart.length === 0) {
+    if (booksInCartArray.length === 0) {
         cart.hidden = true;
     } else {
-        for (let bookObj of booksInCart) {
+        for (let bookObj of booksInCartArray) {
         slider.append(createCartCard(bookObj));
         totalPrice += bookObj.amount * bookObj.price;
         }
     }
 
     cartConfirmButton.href = '../form/index.html';
-    cartConfirmButton.innerHTML = `<h3>${totalPrice}$</h3><div><span class="material-icons">shopping_cart_checkout</span></div>`;
+    cartConfirmButton.innerHTML = `<h3>${totalPrice}$</h3><div><span class="material-icons">shopping_cart_checkout</span>`;
     cart.append(slider, cartConfirmButton);
     return cart;
+}
+
+export const createCartConfirmPopup = function(booksInCartArray) {
+    const slider = createCompleteElement('div', 'cart-slider confirm-slider');
+    let totalPrice = 0;
+    for (let bookObj of booksInCartArray) {
+        slider.append(createCardConfirmPopup(bookObj));
+        totalPrice += bookObj.amount * bookObj.price;
+    }
+    return {slider: slider, total: totalPrice};
 }
 
 export const createCatalogCard = function(book) {
@@ -141,4 +181,42 @@ export const createAndAddPopup = function(bookObj) {
     popupWindow.append(popupImage, popupContent);
     popup.append(popupWindow, popupButton);
     document.querySelector('.catalog').prepend(popup);
+}
+
+export const createAndAddConfirmPopup = function(booksInCartArray) {
+    const USER_DATA = getFormData();
+    const popupElement = createCompleteElement('div', 'popup-body');
+    const popupWindowElement = createCompleteElement('div', 'popup-confirm-window');
+    const popupContentElement = createCompleteElement('div', 'popup-confirm-content');
+    const popupTitleElement = createCompleteElement('h2', 'popup-title', 'Your order successfully created!');
+    const popupRecipientElement = createCompleteElement('h4', '', `<strong>Recipient: </strong>${USER_DATA.fullName}`);
+    const popupAddressElement = createCompleteElement('h4', '', `<strong>Delivery address: </strong>${USER_DATA.address}`);
+    const popupPaymentElement = createCompleteElement('h4', '', `<strong>Payment method: </strong>${USER_DATA.paymentMethod}`);
+    const popupYourOrderElement = createCompleteElement('h4', '', '<strong>Your order:</strong>');
+    const sliderObj = createCartConfirmPopup(booksInCartArray);
+    const sliderElement = sliderObj.slider;
+    const popupGiftsElement = createCompleteElement('h4', '', `<strong>Chosen gifts: </strong>${USER_DATA.gifts}`);
+    const popupTotalElement = createCompleteElement('h3', '', `Total: ${sliderObj.total}$`);
+    const buttonDoneElement = createCompleteElement('a', 'popup-button', 'Done');
+    buttonDoneElement.href = 'https://ExIxIxS.github.io/book_shop/pages/main/'
+
+    popupContentElement.append(popupRecipientElement, popupAddressElement, popupPaymentElement, popupGiftsElement, popupYourOrderElement, sliderElement, popupTotalElement);
+    popupWindowElement.append(popupTitleElement, popupContentElement, buttonDoneElement);
+    popupElement.append(popupWindowElement);
+    document.querySelector('main').prepend(popupElement);
+}
+
+export const createAndAddMessagePopup = function(title, message, buttonTitle, buttonLink) {
+    const popupElement = createCompleteElement('div', 'popup-body');
+    const popupWindowElement = createCompleteElement('div', 'popup-message-window');
+    const popupContentElement = createCompleteElement('div', 'popup-message-content');
+    const popupTitleElement = createCompleteElement('h2', 'popup-title', title);
+    const popupMessageElement = createCompleteElement('h4', 'popup-message', message);
+    const buttonOkElement = createCompleteElement('a', 'popup-button', buttonTitle);
+    buttonOkElement.href = buttonLink;
+
+    popupContentElement.append(popupMessageElement);
+    popupWindowElement.append(popupTitleElement, popupContentElement, buttonOkElement);
+    popupElement.append(popupWindowElement);
+    document.querySelector('main').prepend(popupElement);
 }

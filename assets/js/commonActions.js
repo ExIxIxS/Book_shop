@@ -1,4 +1,5 @@
-import {createCartCard
+import {createCartCard,
+        createAndAddMessagePopup
 } from './create.js';
 
 export const ifBookInCart = function(bookTitle) {
@@ -68,4 +69,17 @@ export const booksInCart = function() {
             localStorage.setItem('booksInCart', JSON.stringify(booksInCartArray));
         }
     return booksInCartArray;
+}
+
+export const checkCart = function() {
+    const TITLE = 'Your cart is empty!';
+    const MESSAGE = 'Please back to catalog and choose a book';
+    const BUTTON = 'Ok';
+    const LINK = 'https://ExIxIxS.github.io/book_shop/pages/main/';
+
+    setTimeout( () => {
+        if (booksInCart().length === 0) {
+            createAndAddMessagePopup(TITLE, MESSAGE, BUTTON, LINK);
+    }},
+    200)
 }
