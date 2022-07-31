@@ -8,6 +8,19 @@ import {ifBookInCart,
     addBookToCart
 } from './commonActions.js';
 
+import {checkNameField,
+        checkSurnameField,
+        checkStreetField,
+        checkHouseNumField,
+        checkFlatNumField,
+        getMinDateString,
+        checkDateInput,
+        checkPaymentInput,
+        checkGiftsInputs,
+        submitForm,
+        resetForm
+} from './form.js';
+
 export const catalogUserInteractive = function(event, booksArray) {
     let cardElement;
     let bookObj;
@@ -86,4 +99,31 @@ export const dragAndDropToCart = function(event, booksArray) {
        dropZone.removeEventListener('drop', drop);
     }
     dropZone.addEventListener('drop', drop);
+}
+
+export const formUserInteractive = function() {
+    const formNameInput = document.querySelector('#name');
+    formNameInput.addEventListener('blur', event => checkNameField(formNameInput));
+    const formSurnameInput = document.querySelector('#surname');
+    formSurnameInput.addEventListener('blur', event => checkSurnameField(formSurnameInput));
+    const formStreetInput = document.querySelector('#street');
+    formStreetInput.addEventListener('blur', event => checkStreetField(formStreetInput));
+    const formHouseNumInput = document.querySelector('#house-number');
+    formHouseNumInput.addEventListener('blur', event => checkHouseNumField(formHouseNumInput));
+    const formFlatNumInput = document.querySelector('#flat-number');
+    formFlatNumInput.addEventListener('blur', event => checkFlatNumField(formFlatNumInput));
+    const formDeliveryDateInput = document.querySelector('#date-delivery');
+    formDeliveryDateInput.min = getMinDateString();
+    formDeliveryDateInput.addEventListener('blur', event => checkDateInput(formDeliveryDateInput));
+    const formPaymentFieldset = document.querySelector('#payment-method');
+    formPaymentFieldset.addEventListener('change', event => checkPaymentInput(formPaymentFieldset));
+    const formCashRadioInput = document.querySelector('#cash');
+    formCashRadioInput.addEventListener('blur', event => checkPaymentInput(formCashRadioInput.parentElement.parentElement));
+    const formCardRadioInput = document.querySelector('#card');
+    formCardRadioInput.addEventListener('blur', event => checkPaymentInput(formCardRadioInput.parentElement.parentElement));
+    const formGiftsFieldset = document.querySelector('#gifts-fieldset');
+    formGiftsFieldset.addEventListener('change', event => checkGiftsInputs(formGiftsFieldset));
+    const form = document.querySelector('form');
+    form.addEventListener('submit', submitForm);
+    form.addEventListener('reset', resetForm);
 }
