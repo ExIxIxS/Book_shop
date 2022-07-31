@@ -131,7 +131,7 @@ const checkDateInput = function(inputElement) {
     checkFormForValidData();
 }
 
-const checkPaymentInput = function(paymentFieldsetElement ) {
+const checkPaymentInput = function(paymentFieldsetElement) {
     const inputsCollection = paymentFieldsetElement.querySelectorAll('input');
     for (let input of inputsCollection) {
         if (input.checked) {
@@ -142,6 +142,33 @@ const checkPaymentInput = function(paymentFieldsetElement ) {
     }
     makeInputInvalid(paymentFieldsetElement);
     checkFormForValidData();
+}
+
+const checkGiftsInputs = function(giftsFieldsetElement) {
+    const inputs = giftsFieldsetElement.querySelectorAll('input');
+    const checkedInputsAmount = Array.from(inputs).filter(input => input.checked === true).length
+    if (checkedInputsAmount === 2) {
+        for (let input of inputs) {
+            if (!input.checked) {
+                input.disabled = true;
+            }
+        }
+    } else {
+        for (let input of inputs) {
+            if (input.disabled) {
+                input.disabled = false;
+            }
+        }
+    }
+}
+
+const submitForm = function(event) {
+    event.preventDefault();
+    //createConfirmWindow();
+}
+
+const resetForm = function(event) {
+    event.preventDefault();
 }
 
 const formUserInteractive = function() {
@@ -164,6 +191,11 @@ const formUserInteractive = function() {
     formCashRadioInput.addEventListener('blur', event => checkPaymentInput(formCashRadioInput.parentElement.parentElement));
     const formCardRadioInput = document.querySelector('#card');
     formCardRadioInput.addEventListener('blur', event => checkPaymentInput(formCardRadioInput.parentElement.parentElement));
+    const formGiftsFieldset = document.querySelector('#gifts-fieldset');
+    formGiftsFieldset.addEventListener('change', event => checkGiftsInputs(formGiftsFieldset));
+    const form = document.querySelector('form');
+    form.addEventListener('submit', submitForm);
+    form.addEventListener('reset', resetForm);
 }
 
 //Creating and adding of header, cart and footer
