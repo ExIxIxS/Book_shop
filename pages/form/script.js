@@ -7,13 +7,18 @@ import {cartUserInteractive,
         formUserInteractive
 } from '../../assets/js/userActions.js';
 
-import {booksInCart
+import {booksInCart,
+        checkCart
 } from '../../assets/js/commonActions.js';
 
 //Creating and adding header, cart and footer
-document.querySelector('.container_centered').prepend(createHeader());
+const containerElement = document.querySelector('.container_centered');
+containerElement.prepend(createHeader());
 document.querySelector('main').prepend(createCartSection(booksInCart()));
-document.querySelector('.container_centered').append(createFooter());
+containerElement.append(createFooter());
+//checking cart, if empty - return back to the main page
+checkCart();
 //User Interactive
-document.querySelector('.cart').addEventListener('click', event => cartUserInteractive(event));
+document.querySelector('.cart').addEventListener('click', cartUserInteractive);
+document.querySelector('.cart-slider').addEventListener('click', checkCart);
 document.addEventListener('DOMContentLoaded', formUserInteractive);

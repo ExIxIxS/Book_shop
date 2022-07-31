@@ -95,7 +95,7 @@ export const createCartSection = function(booksInCartArray) {
     }
 
     cartConfirmButton.href = '../form/index.html';
-    cartConfirmButton.innerHTML = `<h3>${totalPrice}$</h3><div><span class="material-icons">shopping_cart_checkout</span></div>`;
+    cartConfirmButton.innerHTML = `<h3>${totalPrice}$</h3><div><span class="material-icons">shopping_cart_checkout</span>`;
     cart.append(slider, cartConfirmButton);
     return cart;
 }
@@ -186,8 +186,8 @@ export const createAndAddPopup = function(bookObj) {
 export const createAndAddConfirmPopup = function(booksInCartArray) {
     const USER_DATA = getFormData();
     const popupElement = createCompleteElement('div', 'popup-body');
-    const popupWindowElement = createCompleteElement('div', 'popup-summary-window');
-    const popupContentElement = createCompleteElement('div', 'popup-summary-content');
+    const popupWindowElement = createCompleteElement('div', 'popup-confirm-window');
+    const popupContentElement = createCompleteElement('div', 'popup-confirm-content');
     const popupTitleElement = createCompleteElement('h2', 'popup-title', 'Your order successfully created!');
     const popupRecipientElement = createCompleteElement('h4', '', `<strong>Recipient: </strong>${USER_DATA.fullName}`);
     const popupAddressElement = createCompleteElement('h4', '', `<strong>Delivery address: </strong>${USER_DATA.address}`);
@@ -195,13 +195,28 @@ export const createAndAddConfirmPopup = function(booksInCartArray) {
     const popupYourOrderElement = createCompleteElement('h4', '', '<strong>Your order:</strong>');
     const sliderObj = createCartConfirmPopup(booksInCartArray);
     const sliderElement = sliderObj.slider;
-    const popupGiftsElement = createCompleteElement('h4', '', `<strong>Chosen gifts: </strong>${USER_DATA.gifts}.`);
+    const popupGiftsElement = createCompleteElement('h4', '', `<strong>Chosen gifts: </strong>${USER_DATA.gifts}`);
     const popupTotalElement = createCompleteElement('h3', '', `Total: ${sliderObj.total}$`);
-    const buttonDoneElement = createCompleteElement('a', 'popup-button-done', 'Done');
+    const buttonDoneElement = createCompleteElement('a', 'popup-button', 'Done');
     buttonDoneElement.href = 'https://ExIxIxS.github.io/book_shop/pages/main/'
 
     popupContentElement.append(popupRecipientElement, popupAddressElement, popupPaymentElement, popupGiftsElement, popupYourOrderElement, sliderElement, popupTotalElement);
     popupWindowElement.append(popupTitleElement, popupContentElement, buttonDoneElement);
+    popupElement.append(popupWindowElement);
+    document.querySelector('main').prepend(popupElement);
+}
+
+export const createAndAddMessagePopup = function(title, message, buttonTitle, buttonLink) {
+    const popupElement = createCompleteElement('div', 'popup-body');
+    const popupWindowElement = createCompleteElement('div', 'popup-message-window');
+    const popupContentElement = createCompleteElement('div', 'popup-message-content');
+    const popupTitleElement = createCompleteElement('h2', 'popup-title', title);
+    const popupMessageElement = createCompleteElement('h4', 'popup-message', message);
+    const buttonOkElement = createCompleteElement('a', 'popup-button', buttonTitle);
+    buttonOkElement.href = buttonLink;
+
+    popupContentElement.append(popupMessageElement);
+    popupWindowElement.append(popupTitleElement, popupContentElement, buttonOkElement);
     popupElement.append(popupWindowElement);
     document.querySelector('main').prepend(popupElement);
 }

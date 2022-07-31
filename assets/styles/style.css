@@ -146,7 +146,7 @@ header {
 
 .cart {
     background-color: var(--color-background-main-2);
-    height: 140px;
+    height: 160px;
     padding: 20px 60px;
     position: sticky;
     top: 0;
@@ -164,6 +164,8 @@ header {
     background-color: var(--color-background-main-3);
     width: 85%;
     height: 100%;
+    padding: 10px 10px 0 10px;
+    border-radius: 10px;
     display: flex;
     color: var(--color-main-font-2);
     overflow-x: auto;
@@ -244,7 +246,7 @@ header {
 .cart-confirm-button {
     background-color: var(--color-background-main-3);
     width: 12%;
-    height: 100%;
+    height: 80%;
     padding: 10px;
     border-radius: 55px;
     display: flex;
@@ -549,9 +551,9 @@ input[type="checkbox"], input[type="radio"] {
     cursor: not-allowed;
 }
 
-/* Confirm summary window Styling*/
+/* Confirm popup window Styling*/
 
-.popup-summary-window {
+.popup-confirm-window {
     width: 80vw;
     min-height: 40vw;
     margin: 5vw auto;
@@ -565,7 +567,7 @@ input[type="checkbox"], input[type="radio"] {
     align-items: center;
 }
 
-.popup-summary-content {
+.popup-confirm-content {
     width: 90%;
     margin: 2.5vw 0;
     padding: 1% 5%;
@@ -573,18 +575,18 @@ input[type="checkbox"], input[type="radio"] {
     border-radius: 5vw;
 }
 
-.popup-summary-content h2 {
+.popup-confirm-content h2 {
     margin-bottom: 4vw;
     text-align: center;
 }
 
-.popup-summary-content h3 {
+.popup-confirm-content h3 {
     margin: 2vw 0 1vw 0;
     font-family: 'Anton', sans-serif;
     text-align: center;
 }
 
-.popup-summary-content h4 {
+.popup-confirm-content h4 {
     margin: 1vw 0;
     font-family: 'Montserrat', sans-serif;
 }
@@ -598,7 +600,7 @@ input[type="checkbox"], input[type="radio"] {
     min-width: 20%;
 }
 
-.popup-button-done {
+.popup-button {
     width: 8vw;
     height: 3vw;
     background-color: var(--color-background-main-2);
@@ -611,10 +613,34 @@ input[type="checkbox"], input[type="radio"] {
     border-radius: 16px;
 }
 
-.popup-button-done:hover {
+.popup-button:hover {
     cursor: pointer;
 }
 
-.popup-button-done:active {
+.popup-button:active {
     background-color: var(--color-background-main-1);
+}
+
+/* Confirm message popup window Styling*/
+.popup-message-window {
+    width: 80vw;
+    min-height: 20vw;
+    margin: 5vw auto;
+    padding: 4vw;
+    background-color: var(--color-background-main-2);
+    z-index: 10;
+    border-radius: 5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popup-message-content {
+    width: 90%;
+    margin: 2.5vw 0;
+    padding: 1% 5%;
+    background-color: var(--color-background-main-3);
+    border-radius: 5vw;
+    text-align: center;
 }

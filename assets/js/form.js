@@ -160,8 +160,6 @@ export const checkGiftsInputs = function(giftsFieldsetElement) {
 export const submitForm = function(event) {
     event.preventDefault();
     createAndAddConfirmPopup(booksInCart());
-    console.log(getFormData());
-    console.log(getFormData().fullName);
     localStorage.setItem('booksInCart', JSON.stringify([])); //cart is empty now
 
 }
@@ -200,7 +198,7 @@ export const getFormData = function() {
             formDataObj.giftsArray.push(GIFTS[input.value]);
         }
     }
-    formDataObj.gifts = `${formDataObj.giftsArray[0]} and ${formDataObj.giftsArray[1]}`;
+    formDataObj.gifts = `${formDataObj.giftsArray.join(' and ')}`;
 
     return formDataObj; // object with all required form values
 }
