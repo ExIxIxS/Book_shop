@@ -105,6 +105,7 @@ export const createCartSection = function(booksInCartArray) {
 
     cartConfirmButtonElement.href = '../form/index.html';
     cartConfirmButtonElement.innerHTML = `<h3>${totalPrice}$</h3><div><span class="material-icons">shopping_cart_checkout</span>`;
+    cartConfirmButtonElement.title = 'Checkout';
     cartElement.append(sliderElement, cartConfirmButtonElement);
     return cartElement;
 }

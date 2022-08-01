@@ -25,7 +25,7 @@ const makeInputValid = function(inputElement) {
 
 const checkFormForValidData = function() {
     const validCollection = document.querySelectorAll('.valid');
-    const formCompleteButton = document.querySelector('.form-submit-botton');
+    const formCompleteButton = document.querySelector('.form-submit-button');
     const requiredParamAmount = 7; //7 required fields
     if (validCollection.length === requiredParamAmount) {
         formCompleteButton.disabled = false;

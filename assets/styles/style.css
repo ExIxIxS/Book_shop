@@ -40,13 +40,13 @@ html {
 
 /* --- Page color styling --- */
 
-/* color option №1 */
-
 :root {
     --color-background-main-1: #e7cfaa;
     --color-background-main-2: #f9f3ee;
     --color-background-main-3: #ffffff;
     --color-background-popup-1: #e7cfaab7;
+    --color-background-disabled-1: #ececec;
+    --color-invalid: #ff0000;
     --color-main-font-1: #d9aa63;
     --color-main-font-2: #2b1811;
 }
@@ -55,7 +55,7 @@ html {
 
 body {
     width: 100%;
-    background-color: #e7cfaa;
+    background-color: var(--color-background-main-1);
     font-family: 'Goudy Bookletter 1911', serif;
     font-size: 16px;
     color: var(--color-main-font-1);
@@ -82,7 +82,7 @@ h1 {
     margin: 0;
     font-family: 'Anton', sans-serif;
     font-size: 32px;
-    color: #F1CDB3;
+    color: var(--color-main-font-1);
     display: block;
 }
 
@@ -137,7 +137,13 @@ header {
     font-size: 32px;
     color: var(--color-main-font-1);
     text-decoration: none;
-    text-shadow: 0px 4px 3px rgba(0,0,0,0.4), 0px 8px 13px rgba(0,0,0,0.1), 0px 18px 23px rgba(0,0,0,0.1);
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.4), 0px 8px 13px rgba(0,0,0,0.1), 0px 10px 20px rgba(0,0,0,0.1);
+}
+
+.logo-title div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .logo-title-central {
@@ -247,12 +253,21 @@ header {
     background-color: var(--color-background-main-3);
     width: 12%;
     height: 80%;
-    padding: 10px;
+    padding: 7px;
     border-radius: 55px;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: var(--color-background-main-1) 0px 0px 10px, var(--color-background-main-2) 0px 8px 24px;
+}
+
+.cart-confirm-button:hover {
+    box-shadow: var(--color-background-main-1) 0px 0px 18px, var(--color-background-main-2) 0px 0px 24px;;
+}
+
+.cart-confirm-button:active {
+    box-shadow: none;
 }
 
 .cart-confirm-button .material-icons {
@@ -346,7 +361,7 @@ header {
 .card {
     width: 550px;
     height: 350px;
-    background-color: #ffffff;
+    background-color: var(--color-background-main-3);
     margin-bottom: 40px;
     display: flex;
     justify-content: space-around;
@@ -393,7 +408,7 @@ header {
 
 .card:hover .card-button-show {
     font-size: 24px;
-    background-color: #f9f3ee;
+    background-color: var(--color-background-main-2);
     top: 151px;
     left: -146px;
     cursor: pointer;
@@ -415,7 +430,7 @@ header {
     text-align: center;
     flex-direction: column;
     justify-content: center;
-    background-color: #f9f3ee;
+    background-color: var(--color-background-main-2);
     border-radius: 15px;
     font-size: 20px;
 }
@@ -446,8 +461,8 @@ footer a {
 }
 
 #github-logo {
-    width: 3.5vw;
-    height: 3.5vw;
+    width: 45px;
+    height: 45px;
     fill: var(--color-main-font-1);
     padding: 0;
     margin: 0;
@@ -455,14 +470,15 @@ footer a {
 }
 
 .rss-logo {
-    width: 6.5vw;
-    height: 3vw;
+    width: 90px;
+    height: 40px;
     padding: 0;
     margin: 0;
     vertical-align: middle;
 }
 
 p.foot-block {
+    font-size: 16px;
     display: inline-block;
 }
 
@@ -511,14 +527,14 @@ input {
 }
 
 .invalid {
-    color: #ff0000;
-    border-color: #ff0000;
+    color: var(--color-invalid);
+    border-color: var(--color-invalid);
     background-color:var(--color-background-main-2);
 }
 
 .invalid-message {
     margin-bottom: 15px;
-    color: #ff0000;
+    color: var(--color-invalid);
     font-size: 14px;
     font-family: 'Montserrat', sans-serif;
 }
@@ -532,7 +548,7 @@ input[type="checkbox"], input[type="radio"] {
     height: 20px;
 }
 
-.form-submit-botton {
+.form-submit-button {
     height: 50px;
     margin: 20px 60px;
     font-size: 30px;
@@ -544,10 +560,10 @@ input[type="checkbox"], input[type="radio"] {
     cursor: pointer;
 }
 
-.form-submit-botton:disabled {
+.form-submit-button:disabled {
     border: 1px solid var(--color-background-main-3);
     color: var(--color-background-main-3);
-    background-color: #ececec;
+    background-color: var(--color-background-disabled-1);
     box-shadow: none;
     cursor: not-allowed;
 }
