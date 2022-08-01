@@ -481,9 +481,10 @@ form {
     flex-direction: column;
 }
 
-.form-legends {
+.form-title {
     font-size: 34px;
     margin: 0 0 20px 0;
+    text-align: center;
 }
 
 fieldset {
@@ -522,7 +523,7 @@ input {
     font-family: 'Montserrat', sans-serif;
 }
 
-legends {
+legend {
     text-align: center;
 }
 
