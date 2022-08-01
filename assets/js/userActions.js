@@ -58,17 +58,17 @@ export const cartUserInteractive = function(event) {
     switch (event.target.className) {
     // click on the button 'Delete from cart'
     case ('material-icons icon-delete'):
-        const cartCard = event.target.parentElement.parentElement.parentElement;
-        const bookAmount = cartCard.querySelector('.cart-card-summary').firstElementChild.firstElementChild.innerHTML;
-        const bookPrice = cartCard.querySelector('.cart-card-summary').firstElementChild.lastElementChild.innerHTML.slice(0,-1);
+        const cartCardElement = event.target.parentElement.parentElement.parentElement;
+        const bookAmount = cartCardElement.querySelector('.cart-card-summary').firstElementChild.firstElementChild.innerHTML;
+        const bookPrice = cartCardElement.querySelector('.cart-card-summary').firstElementChild.lastElementChild.innerHTML.slice(0,-1);
         const totalBookPrice = bookPrice * bookAmount;
-        let currentTotalPriceElement = document.querySelector('.cart-confirm-button').firstElementChild;
+        const currentTotalPriceElement = document.querySelector('.cart-confirm-button').firstElementChild;
         currentTotalPriceElement.innerHTML = Number(currentTotalPriceElement.innerHTML.slice(0,-1)) - totalBookPrice  + '$';
-        cartCard.remove();
+        cartCardElement.remove();
         //work with Array booksInCart
-        const bookTitle = cartCard.querySelector('.cart-card-title').innerHTML;
-        const booksInCart = JSON.parse(localStorage.getItem('booksInCart'));
-        localStorage.setItem('booksInCart', JSON.stringify(deleteBookfromArray(bookTitle, booksInCart)));
+        const bookTitle = cartCardElement.querySelector('.cart-card-title').innerHTML;
+        const booksInCartArray = JSON.parse(localStorage.getItem('booksInCart'));
+        localStorage.setItem('booksInCart', JSON.stringify(deleteBookfromArray(bookTitle, booksInCartArray)));
         break;
     }
 }
@@ -79,9 +79,9 @@ export const dragAndDropToCart = function(event, booksArray) {
     }
     const cardElement = event.target.parentElement.parentElement;
     const bookTitle = cardElement.querySelector('.card-title').innerHTML;
-    const dropZone = document.querySelector('.dropzone');
+    const dropZoneElement = document.querySelector('.dropzone');
 
-    dropZone.addEventListener('dragover', (event) => {
+    dropZoneElement.addEventListener('dragover', (event) => {
         // prevent default to allow drop
         event.preventDefault();
     });
@@ -96,9 +96,9 @@ export const dragAndDropToCart = function(event, booksArray) {
         } else {
             addBookToCart(bookObj);
         };
-       dropZone.removeEventListener('drop', drop);
+       dropZoneElement.removeEventListener('drop', drop);
     }
-    dropZone.addEventListener('drop', drop);
+    dropZoneElement.addEventListener('drop', drop);
 }
 
 export const formUserInteractive = function() {

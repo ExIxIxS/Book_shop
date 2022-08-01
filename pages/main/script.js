@@ -6,16 +6,16 @@ import {catalogUserInteractive,
         dragAndDropToCart
 } from '../../assets/js/userActions.js';
 
-import {booksInCart
+import {getBooksInCart
 } from '../../assets/js/commonActions.js';
 
 fetch('../../assets/json/books.json') //path to the file with json data
         .then(response => {
             return response.json();
         })
-        .then(books => {
-            document.body.prepend(createCatalogPage(books, booksInCart()));
-            document.querySelector('.catalog').addEventListener('click', event => catalogUserInteractive(event, books));
-            document.querySelector('.cart').addEventListener('click', event => cartUserInteractive(event));
-            document.querySelector('.catalog').addEventListener('dragstart', event => dragAndDropToCart(event, books));
+        .then(booksArray => {
+            document.body.prepend(createCatalogPage(booksArray, getBooksInCart()));
+            document.querySelector('.catalog').addEventListener('click', event => catalogUserInteractive(event, booksArray));
+            document.querySelector('.cart').addEventListener('click', cartUserInteractive);
+            document.querySelector('.catalog').addEventListener('dragstart', event => dragAndDropToCart(event, booksArray));
         });

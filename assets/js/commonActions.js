@@ -1,5 +1,5 @@
 import {createCartCard,
-        createAndAddMessagePopup
+        createAndAddPopupMessage
 } from './create.js';
 
 export const ifBookInCart = function(bookTitle) {
@@ -28,9 +28,9 @@ export const increaseBookAmount = function(bookTitle) {
             let currentTotalPriceElement = document.querySelector('.cart-confirm-button').firstElementChild;
             currentTotalPriceElement.innerHTML = Number(currentTotalPriceElement.innerHTML.slice(0,-1)) + Number(bookPrice) + '$';
             //work with Array booksInCart
-            const booksInCart = JSON.parse(localStorage.getItem('booksInCart'));
-            increaseBookAmountInArray(bookTitle, booksInCart);
-            localStorage.setItem('booksInCart', JSON.stringify(booksInCart));
+            const booksInCartArray = JSON.parse(localStorage.getItem('booksInCart'));
+            increaseBookAmountInArray(bookTitle, booksInCartArray);
+            localStorage.setItem('booksInCart', JSON.stringify(booksInCartArray));
         }
     }
 }
@@ -57,12 +57,12 @@ export const addBookToCart = function(bookObj) {
     let currentTotalPriceElement = document.querySelector('.cart-confirm-button').firstElementChild;
     currentTotalPriceElement.innerHTML = Number(currentTotalPriceElement.innerHTML.slice(0,-1)) + Number(bookPrice) + '$';
     //work with Array booksInCart
-    const booksInCart = JSON.parse(localStorage.getItem('booksInCart'));
-    booksInCart.push(bookObj);
-    localStorage.setItem('booksInCart', JSON.stringify(booksInCart));
+    const booksInCartArray = JSON.parse(localStorage.getItem('booksInCart'));
+    booksInCartArray.push(bookObj);
+    localStorage.setItem('booksInCart', JSON.stringify(booksInCartArray));
 }
 
-export const booksInCart = function() {
+export const getBooksInCart = function() {
     //initialize Local Storage
     const booksInCartArray = JSON.parse(localStorage.getItem('booksInCart')) ?? [];
         if (booksInCartArray.length === 0) {
@@ -73,13 +73,13 @@ export const booksInCart = function() {
 
 export const checkCart = function() {
     const TITLE = 'Your cart is empty!';
-    const MESSAGE = 'Please back to catalog and choose a book';
+    const MESSAGE = 'Please back to the catalog and choose a book';
     const BUTTON = 'Ok';
     const LINK = 'https://ExIxIxS.github.io/book_shop/pages/main/';
 
     setTimeout( () => {
-        if (booksInCart().length === 0) {
-            createAndAddMessagePopup(TITLE, MESSAGE, BUTTON, LINK);
+        if (getBooksInCart().length === 0) {
+            createAndAddPopupMessage(TITLE, MESSAGE, BUTTON, LINK);
     }},
     200)
 }
