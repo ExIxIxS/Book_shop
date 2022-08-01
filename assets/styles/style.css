@@ -454,7 +454,7 @@ footer a {
     vertical-align: middle;
 }
 
-#rss-logo {
+.rss-logo {
     width: 6.5vw;
     height: 3vw;
     padding: 0;

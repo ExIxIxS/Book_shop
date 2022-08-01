@@ -1,7 +1,7 @@
 import {getFormData
 } from './form.js';
 
-export const createCompleteElement = function(type, className = '', innerHTML = '') {
+export const createCompleteElement = function(type, className = '', innerHTML = '',) {
     const element = document.createElement(type);
     if (className !== '')
         {element.className = className};
@@ -10,155 +10,182 @@ export const createCompleteElement = function(type, className = '', innerHTML = 
     return element;
 }
 
+const createLogo = function() {
+    const logoElement = createCompleteElement('a', 'logo-title');
+    logoElement.href = 'https://ExIxIxS.github.io/book_shop/pages/main/';
+    const logoFirstPart = createCompleteElement('div', '', '<p>b</p><p>m</p>');
+    const logoSecondPart = createCompleteElement('div', 'logo-title-central', '<p>OO</p>');
+    const logoThirdPart = createCompleteElement('div', '', '<p>k</p><p>d</p>');
+    logoElement.append(logoFirstPart, logoSecondPart, logoThirdPart);
+    return logoElement;
+}
+
 export const createHeader = function() {
-    const header = createCompleteElement('header', 'header')
-    const title = createCompleteElement('h1', '', "Book Mood");
-    title.hidden = true;
-    const LOGOCONTENT = '<div><p>b</p><p>m</p></div><div class="logo-title-central"><p>OO</p></div><div><p>k</p><p>d</p></div>';
-    const logo = createCompleteElement('a', 'logo-title', LOGOCONTENT);
-    logo.href = 'https://ExIxIxS.github.io/book_shop/pages/main/';
+    const headerElement = createCompleteElement('header', 'header')
+    const titleElement = createCompleteElement('h1', '', "Book Mood");
+    titleElement.hidden = true;
+    const logoElement = createLogo();
     const sloganContent = '“Think before you speak. Read before you think.”';
-    const slogan = createCompleteElement('p', 'slogan', sloganContent);
-    header.append(title, logo, slogan);
-    return header;
+    const sloganElement = createCompleteElement('p', 'slogan', sloganContent);
+    headerElement.append(titleElement, logoElement, sloganElement);
+    return headerElement;
 }
 
 export const createCartCard = function(bookObj) {
-    const card = createCompleteElement('div','cart-card');
-    const cardContent = createCompleteElement('div', 'cart-card-content');
-    const cardImage = createCompleteElement('div', 'cart-card-image');
-    const image = createCompleteElement('img', 'image');
-    image.src = bookObj.imageLink;
-    image.alt = 'book cover';
-    image.width = '320';
-    image.height = '460';
-    const cardText = createCompleteElement('div','cart-card-text');
-    const cardTitle = createCompleteElement('h5', 'cart-card-title', bookObj.title);
-    const cardAuthor = createCompleteElement('h6', 'cart-card-author', bookObj.author);
-    const summary = createCompleteElement('div', 'cart-card-summary');
-    const summaryContainer = createCompleteElement('div', '');
-    const summaryAmount = createCompleteElement('h6', 'cart-card-summary-amount', bookObj.amount);
-    const summaryMultiplier = createCompleteElement('h6', 'cart-card-summary-multiplier', 'x');
-    const summaryPrice = createCompleteElement('h6', 'cart-card-summary-price', (bookObj.price + '$'));
-    const deleteButton = createCompleteElement('div', 'cart-card-summary-button', '<span class="material-icons icon-delete" title="Delete from cart">delete_forever</span>');
+    const cardElement = createCompleteElement('div','cart-card');
+    const cardContentElement = createCompleteElement('div', 'cart-card-content');
+    const cardImageElement = createCompleteElement('div', 'cart-card-image');
+    const imageElement = createCompleteElement('img', 'image');
+    imageElement.src = bookObj.imageLink;
+    imageElement.alt = 'book cover';
+    imageElement.width = '320';
+    imageElement.height = '460';
+    const cardTextElement = createCompleteElement('div','cart-card-text');
+    const cardTitleElement = createCompleteElement('h5', 'cart-card-title', bookObj.title);
+    const cardAuthorElement = createCompleteElement('h6', 'cart-card-author', bookObj.author);
+    const summaryElement = createCompleteElement('div', 'cart-card-summary');
+    const summaryContainerElement = createCompleteElement('div', '');
+    const summaryAmountElement = createCompleteElement('h6', 'cart-card-summary-amount', bookObj.amount);
+    const summaryMultiplierElement = createCompleteElement('h6', 'cart-card-summary-multiplier', 'x');
+    const summaryPriceElement = createCompleteElement('h6', 'cart-card-summary-price', (bookObj.price + '$'));
+    const deleteButtonContent = '<span class="material-icons icon-delete" title="Delete from cart">delete_forever</span>';
+    const deleteButtonElement = createCompleteElement('div', 'cart-card-summary-button', deleteButtonContent);
 
-    cardImage.append(image);
-    cardText.append(cardTitle, cardAuthor);
-    summaryContainer.append(summaryAmount, summaryMultiplier, summaryPrice);
-    summary.append(summaryContainer, deleteButton);
-    cardContent.append(cardImage, cardText);
-    card.append(cardContent, summary);
-    return card;
+    cardImageElement.append(imageElement);
+    cardTextElement.append(cardTitleElement, cardAuthorElement);
+    summaryContainerElement.append(summaryAmountElement, summaryMultiplierElement, summaryPriceElement);
+    summaryElement.append(summaryContainerElement, deleteButtonElement);
+    cardContentElement.append(cardImageElement, cardTextElement);
+    cardElement.append(cardContentElement, summaryElement);
+    return cardElement;
 }
 
 export const createCardConfirmPopup = function(bookObj) {
-    const card = createCompleteElement('div','cart-card confirm-cart-card');
-    const cardContent = createCompleteElement('div', 'cart-card-content');
-    const cardImage = createCompleteElement('div', 'cart-card-image');
-    const image = createCompleteElement('img', 'image');
-    image.src = bookObj.imageLink;
-    image.alt = 'book cover';
-    image.width = '320';
-    image.height = '460';
-    const cardText = createCompleteElement('div','cart-card-text');
-    const cardTitle = createCompleteElement('h5', 'cart-card-title', bookObj.title);
-    const cardAuthor = createCompleteElement('h6', 'cart-card-author', bookObj.author);
-    const summary = createCompleteElement('div', 'cart-card-summary');
-    const summaryContainer = createCompleteElement('div', '');
-    const summaryAmount = createCompleteElement('h6', 'cart-card-summary-amount', bookObj.amount);
-    const summaryMultiplier = createCompleteElement('h6', 'cart-card-summary-multiplier', 'x');
-    const summaryPrice = createCompleteElement('h6', 'cart-card-summary-price', (bookObj.price + '$'));
+    const cardElement = createCompleteElement('div','cart-card confirm-cart-card');
+    const cardContentElement = createCompleteElement('div', 'cart-card-content');
+    const cardImageElement = createCompleteElement('div', 'cart-card-image');
+    const imageElement = createCompleteElement('img', 'image');
+    imageElement.src = bookObj.imageLink;
+    imageElement.alt = 'book cover';
+    imageElement.width = '320';
+    imageElement.height = '460';
+    const cardTextElement = createCompleteElement('div','cart-card-text');
+    const cardTitleElement = createCompleteElement('h5', 'cart-card-title', bookObj.title);
+    const cardAuthorElement = createCompleteElement('h6', 'cart-card-author', bookObj.author);
+    const summaryElement = createCompleteElement('div', 'cart-card-summary');
+    const summaryContainerElement = createCompleteElement('div', '');
+    const summaryAmountElement = createCompleteElement('h6', 'cart-card-summary-amount', bookObj.amount);
+    const summaryMultiplierElement = createCompleteElement('h6', 'cart-card-summary-multiplier', 'x');
+    const summaryPriceElement = createCompleteElement('h6', 'cart-card-summary-price', (bookObj.price + '$'));
 
-    cardImage.append(image);
-    cardText.append(cardTitle, cardAuthor);
-    summaryContainer.append(summaryAmount, summaryMultiplier, summaryPrice);
-    summary.append(summaryContainer);
-    cardContent.append(cardImage, cardText);
-    card.append(cardContent, summary);
-    return card;
+    cardImageElement.append(imageElement);
+    cardTextElement.append(cardTitleElement, cardAuthorElement);
+    summaryContainerElement.append(summaryAmountElement, summaryMultiplierElement, summaryPriceElement);
+    summaryElement.append(summaryContainerElement);
+    cardContentElement.append(cardImageElement, cardTextElement);
+    cardElement.append(cardContentElement, summaryElement);
+    return cardElement;
 }
 
 export const createCartSection = function(booksInCartArray) {
-    const cart = createCompleteElement('section', 'cart');
-    const slider = createCompleteElement('div', 'cart-slider dropzone');
-    const cartConfirmButton = createCompleteElement('a', 'cart-confirm-button');
+    const cartElement = createCompleteElement('section', 'cart');
+    const sliderElement = createCompleteElement('div', 'cart-slider dropzone');
+    const cartConfirmButtonElement = createCompleteElement('a', 'cart-confirm-button');
 
     let totalPrice = 0;
 
     if (booksInCartArray.length === 0) {
-        cart.hidden = true;
+        cartElement.hidden = true;
     } else {
         for (let bookObj of booksInCartArray) {
-        slider.append(createCartCard(bookObj));
+        sliderElement.append(createCartCard(bookObj));
         totalPrice += bookObj.amount * bookObj.price;
         }
     }
 
-    cartConfirmButton.href = '../form/index.html';
-    cartConfirmButton.innerHTML = `<h3>${totalPrice}$</h3><div><span class="material-icons">shopping_cart_checkout</span>`;
-    cart.append(slider, cartConfirmButton);
-    return cart;
+    cartConfirmButtonElement.href = '../form/index.html';
+    cartConfirmButtonElement.innerHTML = `<h3>${totalPrice}$</h3><div><span class="material-icons">shopping_cart_checkout</span>`;
+    cartElement.append(sliderElement, cartConfirmButtonElement);
+    return cartElement;
 }
 
 export const createCartConfirmPopup = function(booksInCartArray) {
-    const slider = createCompleteElement('div', 'cart-slider confirm-slider');
+    const sliderElement = createCompleteElement('div', 'cart-slider confirm-slider');
     let totalPrice = 0;
     for (let bookObj of booksInCartArray) {
-        slider.append(createCardConfirmPopup(bookObj));
+        sliderElement.append(createCardConfirmPopup(bookObj));
         totalPrice += bookObj.amount * bookObj.price;
     }
-    return {slider: slider, total: totalPrice};
+    return {slider: sliderElement, total: totalPrice};
 }
 
-export const createCatalogCard = function(book) {
-    const card = createCompleteElement('div', 'card');
-    const cardButtonShow = createCompleteElement('div', 'card-button-show', 'Show More');
-    const cardButtonAdd = createCompleteElement('div', 'card-button-add', 'Add to cart');
-    const cardImage = createCompleteElement('div', 'card-content card-content-image');
-    const image = createCompleteElement('img', 'image draggable');
-    image.src = book.imageLink;
-    image.alt = 'book cover'
-    image.width = '320';
-    image.height = '460';
-    image.draggable='true';
-    const cardText = createCompleteElement('div', 'card-content card-content-text');
-    const cardTitle = createCompleteElement('h4', 'card-title', book.title);
-    const cardAuthor = createCompleteElement('h5', 'card-author', book.author);
-    const cardPrice = createCompleteElement('p', 'card-price', ('$' + book.price));
+export const createCatalogCard = function(bookObj) {
+    const cardElement = createCompleteElement('div', 'card');
+    const cardButtonShowElement = createCompleteElement('div', 'card-button-show', 'Show More');
+    const cardButtonAddElement = createCompleteElement('div', 'card-button-add', 'Add to cart');
+    const cardImageElement = createCompleteElement('div', 'card-content card-content-image');
+    const imageElement = createCompleteElement('img', 'image draggable');
+    imageElement.src = bookObj.imageLink;
+    imageElement.alt = 'book cover'
+    imageElement.width = '320';
+    imageElement.height = '460';
+    imageElement.draggable='true';
+    const cardTextElement = createCompleteElement('div', 'card-content card-content-text');
+    const cardTitleElement = createCompleteElement('h4', 'card-title', bookObj.title);
+    const cardAuthorElement = createCompleteElement('h5', 'card-author', bookObj.author);
+    const cardPriceElement = createCompleteElement('p', 'card-price', ('$' + bookObj.price));
 
-    cardImage.append(image);
-    cardText.append(cardTitle, cardAuthor, cardButtonAdd, cardPrice);
-    card.append(cardButtonShow, cardImage, cardText);
-    return card;
+    cardImageElement.append(imageElement);
+    cardTextElement.append(cardTitleElement, cardAuthorElement, cardButtonAddElement, cardPriceElement);
+    cardElement.append(cardButtonShowElement, cardImageElement, cardTextElement);
+    return cardElement;
     }
 
-export const createCatalogSection = function(books) {
-    const Catalog = createCompleteElement('section', 'catalog');
-    const cardContainer = createCompleteElement('div', 'card-container');
+export const createCatalogSection = function(booksArray) {
+    const catalogElement = createCompleteElement('section', 'catalog');
+    const cardContainerElement = createCompleteElement('div', 'card-container');
 
-    for (let book of books) {
-        cardContainer.append(createCatalogCard(book));
+    for (let bookObj of booksArray) {
+        cardContainerElement.append(createCatalogCard(bookObj));
     }
 
-    Catalog.append(cardContainer);
-    return Catalog;
+    catalogElement.append(cardContainerElement);
+    return catalogElement;
 }
 
-export const createMain = function(content) {
-    const main = document.createElement('main');
-    main.append(...content);
-    return main;
+export const createMain = function(elementsArray) {
+    const mainElement = document.createElement('main');
+    mainElement.append(...elementsArray);
+    return mainElement;
 }
 
 export const createFooter = function() {
-    const FOOTERCONTENT = '<a title="Me on GitHub" href="https://github.com/ExIxIxS"><svg id="github-logo" height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg><p class="foot-block">ExIxIxS</p></a><a href="https://rs.school/js-en/"><img id="rss-logo" src="../../assets/icons/rs_school_js.svg" alt="RSSchool logo" width="73" height="26"></a><p class="foot-block">© Denis Bondarenko 2022</p></a>';
-    const footer = createCompleteElement('footer', 'footer', FOOTERCONTENT);
-    return footer;
+    const footerElement = createCompleteElement('footer', 'footer');
+    const githubLogoSvgContent = '<svg id="github-logo" height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>'
+    const githubElement = createCompleteElement('a', '', githubLogoSvgContent);
+    githubElement.title = 'Me on GitHub';
+    githubElement.href = 'https://github.com/ExIxIxS';
+    const githubText = createCompleteElement('p', 'foot-block', 'ExIxIxS');
+    githubElement.append(githubText);
+
+    const rsSchoolElement = createCompleteElement('a');
+    rsSchoolElement.href = 'https://rs.school/js-en/';
+    const rsSchoolImageElement = createCompleteElement('img', 'rss-logo');
+    rsSchoolImageElement.src = '../../assets/icons/rs_school_js.svg';
+    rsSchoolImageElement.alt = 'RSSchool logo';
+    rsSchoolImageElement.width = '73';
+    rsSchoolImageElement.height = '26';
+    rsSchoolElement.append(rsSchoolImageElement);
+
+    const authorElement = createCompleteElement('p', 'foot-block', '© Denis Bondarenko 2022');
+
+    footerElement.append(githubElement, rsSchoolElement, authorElement);
+    return footerElement;
 }
 
-export const createCatalogPage = function(books, booksInCart) {
+export const createCatalogPage = function(booksArray, booksInCartArray) {
     const CatalogPage = createCompleteElement('div', 'container_centered');
-    CatalogPage.append(createHeader(), createMain([createCartSection(booksInCart), createCatalogSection(books)]), createFooter());
+    CatalogPage.append(createHeader(), createMain([createCartSection(booksInCartArray), createCatalogSection(booksArray)]), createFooter());
     return CatalogPage;
 }
 
@@ -206,7 +233,7 @@ export const createAndAddConfirmPopup = function(booksInCartArray) {
     document.querySelector('main').prepend(popupElement);
 }
 
-export const createAndAddMessagePopup = function(title, message, buttonTitle, buttonLink) {
+export const createAndAddPopupMessage = function(title, message, buttonTitle, buttonLink) {
     const popupElement = createCompleteElement('div', 'popup-body');
     const popupWindowElement = createCompleteElement('div', 'popup-message-window');
     const popupContentElement = createCompleteElement('div', 'popup-message-content');

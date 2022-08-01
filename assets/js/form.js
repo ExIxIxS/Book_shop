@@ -1,4 +1,4 @@
-import {booksInCart
+import {getBooksInCart
 } from './commonActions.js';
 
 import {createCompleteElement,
@@ -116,9 +116,9 @@ export const getMinDateString = function() {
 }
 
 export const checkDateInput = function(inputElement) {
-    const USERDATE = inputElement.value;
+    const USER_DATE = inputElement.value;
     //USERDATE mandatory, not earlier than next day
-    if (Date.parse(USERDATE) >= Date.parse(getMinDateString())) {
+    if (Date.parse(USER_DATE) >= Date.parse(getMinDateString())) {
         makeInputValid(inputElement);
     } else {
         makeInputInvalid(inputElement);
@@ -159,7 +159,7 @@ export const checkGiftsInputs = function(giftsFieldsetElement) {
 
 export const submitForm = function(event) {
     event.preventDefault();
-    createAndAddConfirmPopup(booksInCart());
+    createAndAddConfirmPopup(getBooksInCart());
     localStorage.setItem('booksInCart', JSON.stringify([])); //cart is empty now
 
 }
