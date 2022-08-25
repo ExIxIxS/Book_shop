@@ -75,10 +75,11 @@ export const checkCart = function() {
     const TITLE = 'Your cart is empty!';
     const MESSAGE = 'Please back to the catalog and choose a book';
     const BUTTON = 'Ok';
-    const LINK = 'https://ExIxIxS.github.io/book_shop/pages/main/';
+    const LINK = '../main/index.html';
 
     setTimeout( () => {
         if (getBooksInCart().length === 0) {
+            document.querySelector('body').classList.add('opened-popup');
             createAndAddPopupMessage(TITLE, MESSAGE, BUTTON, LINK);
     }},
     200)

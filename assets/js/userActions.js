@@ -50,6 +50,7 @@ export const catalogUserInteractive = function(event, booksArray) {
     // click on the button 'Close PopUp'
     case ('material-icons icon-close'):
         document.querySelector('.popup-body').remove();
+        document.querySelector('body').classList.remove('opened-popup');
         break;
     }
 }

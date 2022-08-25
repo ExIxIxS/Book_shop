@@ -61,9 +61,14 @@ body {
     color: var(--color-main-font-1);
 }
 
+body.opened-popup {
+    overflow-y: hidden;
+}
+
 .container_centered {
-    width: 1280px;
-    min-width: 1280px;
+    width: calc(1280vw*100/1280);
+    max-width: 1280px;
+    min-width: 732px;
     margin: 40px auto;
     border-radius: 55px;
     box-shadow: var(--color-background-main-1) 0px 4px 16px, var(--color-background-main-2) 0px 8px 24px, var(--color-background-main-3) 0px 16px 56px;
@@ -71,7 +76,7 @@ body {
 
 img {
     width: 100%;
-    height: 100%;
+    height: auto;
     padding: 0;
     margin: 0;
 }
@@ -179,9 +184,9 @@ header {
 }
 
 .cart-card {
-    width: 15%;
-    min-width: 15%;
-    margin: 0.5%;
+    width: 144px;
+    min-width: 144px;
+    margin: 5px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -290,16 +295,19 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background-color: var(--color-background-popup-1);
     z-index: 9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .popup-button-close {
     width: 5vw;
     height: 5vw;
     position: fixed;
-    top: 40vw;
+    top: 5vw;
     left: 90vw;
     z-index: 10;
 }
@@ -314,10 +322,10 @@ header {
 
 
 .popup-window {
-    width: 80vw;
-    height: 30vw;
-    margin: 10vw auto;
-    padding: 4vw;
+    width: 85%;
+    height: auto;
+    margin: 10vw 0;
+    padding: 50px 4vw;
     background-color: var(--color-background-main-2);
     z-index: 10;
     border-radius: 5vw;
@@ -339,24 +347,25 @@ header {
 }
 
 .popup-content h2{
-    font-size: 2.5vw;
+    font-size: 46px;
 }
 
 .popup-content h3{
-    font-size: 1.8vw;
+    font-size: 32px;
     text-align: justify;
+    line-height: 120%;
+    margin: 32px 0;
 }
 
 .popup-content h4{
-    font-size: 1vw;
+    font-size: 24px;
     text-align: right;
 }
 
 .card-container {
     padding: 40px 60px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto auto;
 }
 
 .card {
@@ -378,6 +387,10 @@ header {
 
 .card-content-image {
     box-shadow: 5px 5px 8px rgb(159, 159, 168);
+}
+
+.card-content-image img{
+    height: 100%;
 }
 
 .card-content-text {
@@ -488,7 +501,7 @@ p.foot-block {
 .user-form-section {
     min-height: 500px;
     margin: 0;
-    padding: 40px 200px;
+    padding: 40px calc(200vw*100/1280) ;
     background-color: var(--color-background-main-3);
 }
 
@@ -521,7 +534,7 @@ input {
 }
 
 .personal-data input {
-    width: 50%;
+    min-width: 394px;
     height: 40px;
     padding: 0 5px 0 15px;
     border-radius: 15px;
@@ -572,9 +585,9 @@ input[type="checkbox"], input[type="radio"] {
 /* Confirm popup window Styling*/
 
 .popup-confirm-window {
-    width: 80vw;
+    width: 80%;
     min-height: 40vw;
-    margin: 5vw auto;
+    margin: 64px 0;
     padding: 4vw;
     background-color: var(--color-background-main-2);
     z-index: 10;
@@ -585,12 +598,18 @@ input[type="checkbox"], input[type="radio"] {
     align-items: center;
 }
 
+.popup-confirm-window h2 {
+    text-align: center;
+}
+
 .popup-confirm-content {
     width: 90%;
     margin: 2.5vw 0;
     padding: 1% 5%;
     background-color: var(--color-background-main-3);
     border-radius: 5vw;
+    display: flex;
+    flex-direction: column;
 }
 
 .popup-confirm-content h2 {
@@ -611,24 +630,30 @@ input[type="checkbox"], input[type="radio"] {
 
 .confirm-slider {
     width: 100%;
+    height: auto;
+    padding: 20px;
 }
 
 .confirm-cart-card {
     width: 20%;
-    min-width: 20%;
+    min-width: 164px;
+}
+
+.confirm-cart-card img {
+    height: 100%;
 }
 
 .popup-button {
-    width: 8vw;
-    height: 3vw;
+    width: 98px;
+    height: 42px;
     background-color: var(--color-background-main-2);
-    font-size: 2.5vw;
+    font-size: 32px;
     color: var(--color-main-font-1);
     display: flex;
     align-items: center;
     justify-content: center;
     border: 2px solid var(--color-main-font-1);
-    border-radius: 16px;
+    border-radius: 20px;
 }
 
 .popup-button:hover {
@@ -654,6 +679,10 @@ input[type="checkbox"], input[type="radio"] {
     align-items: center;
 }
 
+.popup-message-window h2 {
+    text-align: center;
+}
+
 .popup-message-content {
     width: 90%;
     margin: 2.5vw 0;
@@ -661,4 +690,23 @@ input[type="checkbox"], input[type="radio"] {
     background-color: var(--color-background-main-3);
     border-radius: 5vw;
     text-align: center;
+}
+
+@media (max-width: 1230px) {
+    .card-container {
+        grid-template-columns: auto;
+        justify-content: center;
+    }
+
+    .popup-content h2 {
+        font-size: 32px;
+    }
+
+    .popup-content h3 {
+        font-size: 23px;
+    }
+
+    .popup-content h4 {
+        font-size: 18px;
+    }
 }
