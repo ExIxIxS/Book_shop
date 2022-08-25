@@ -12,7 +12,7 @@ export const createCompleteElement = function(type, className = '', innerHTML = 
 
 const createLogo = function() {
     const logoElement = createCompleteElement('a', 'logo-title');
-    logoElement.href = 'https://ExIxIxS.github.io/book_shop/pages/main/';
+    logoElement.href = '../main/index.html';
     const logoFirstPart = createCompleteElement('div', '', '<p>b</p><p>m</p>');
     const logoSecondPart = createCompleteElement('div', 'logo-title-central', '<p>OO</p>');
     const logoThirdPart = createCompleteElement('div', '', '<p>k</p><p>d</p>');
@@ -209,6 +209,8 @@ export const createAndAddPopup = function(bookObj) {
     popupWindow.append(popupImage, popupContent);
     popup.append(popupWindow, popupButton);
     document.querySelector('.catalog').prepend(popup);
+
+    document.querySelector('body').classList.add('opened-popup');
 }
 
 export const createAndAddConfirmPopup = function(booksInCartArray) {
@@ -226,12 +228,14 @@ export const createAndAddConfirmPopup = function(booksInCartArray) {
     const popupGiftsElement = createCompleteElement('h4', '', `<strong>Chosen gifts: </strong>${USER_DATA.gifts}`);
     const popupTotalElement = createCompleteElement('h3', '', `Total: ${sliderObj.total}$`);
     const buttonDoneElement = createCompleteElement('a', 'popup-button', 'Done');
-    buttonDoneElement.href = 'https://ExIxIxS.github.io/book_shop/pages/main/'
+    buttonDoneElement.href = '../main/index.html'
 
     popupContentElement.append(popupRecipientElement, popupAddressElement, popupPaymentElement, popupGiftsElement, popupYourOrderElement, sliderElement, popupTotalElement);
     popupWindowElement.append(popupTitleElement, popupContentElement, buttonDoneElement);
     popupElement.append(popupWindowElement);
     document.querySelector('main').prepend(popupElement);
+
+    document.querySelector('body').classList.add('opened-popup');
 }
 
 export const createAndAddPopupMessage = function(title, message, buttonTitle, buttonLink) {
