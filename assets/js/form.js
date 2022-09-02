@@ -38,9 +38,13 @@ const checkFormForValidData = function() {
 
 export const checkNameField = function(inputElement) {
     const NAME = inputElement.value;
-    //NAME (mandatory, the length not less than 4 symbols, strings only)
-    const validString = (NAME.match(/\p{Letter}{4,}/gu) ?? []).join('')
-    if (validString.length === NAME.length && NAME.length !== 0) {
+    /*
+    NAME
+        requirements --> mandatory, the length not less than 4 symbols, strings only
+        implementation --> only letters and single spaces between
+    */
+    const validString = (NAME.match(/^(\p{Letter}+\s?)+\p{Letter}+$/u) ?? [[]])[0];
+    if (validString.length === NAME.length && NAME.length >= 4) {
         makeInputValid(inputElement);
     } else {
         makeInputInvalid(inputElement);
@@ -50,9 +54,13 @@ export const checkNameField = function(inputElement) {
 
 export const checkSurnameField = function(inputElement) {
     const SURNAME = inputElement.value;
-    //SURNAME (mandatory, the length not less than 5 symbols, strings only)
-    const validString = (SURNAME.match(/\p{Letter}{5,}/u) ?? []).join('')
-    if (validString.length === SURNAME.length && SURNAME.length !== 0) {
+    /*
+    SURNAME
+        requirements --> mandatory, the length not less than 5 symbols, strings only
+        implementation --> only letters and single spaces between
+    */
+    const validString = (SURNAME.match(/^(\p{Letter}+\s?)+\p{Letter}+$/u) ?? [[]])[0];
+    if (validString.length === SURNAME.length && SURNAME.length >= 5) {
         makeInputValid(inputElement);
     } else {
          makeInputInvalid(inputElement);
@@ -62,8 +70,11 @@ export const checkSurnameField = function(inputElement) {
 
 export const checkStreetField = function(inputElement) {
     const STREET = inputElement.value;
-    //STREET mandatory, the length not less than 5 symbols, the numbers are allowed
-    //spaces also allowed, if not, delete '\s*'
+    /*
+    STREET
+        requirements --> mandatory, the length not less than 5 symbols, the numbers are allowed
+        implementation --> spaces also allowed, if not, delete '\s*'
+    */
     const validString = (STREET.match(/(\p{N}*\s*\p{Letter}+\s*\p{N}*)+/u) ?? [[]])
     if (validString[0].length === STREET.length && validString[0].length >= 5) {
         makeInputValid(inputElement);
@@ -76,7 +87,7 @@ export const checkStreetField = function(inputElement) {
 export const checkHouseNumField = function(inputElement) {
     const HOUSENUMBER = inputElement.value;
     //HOUSENUMBER (mandatory, numbers only, positive numbers only)
-    const validString = (HOUSENUMBER.match(/\d+/) ?? [[]])
+    const validString = (HOUSENUMBER.match(/[1-9]+/) ?? [[]])
     if (validString[0].length === HOUSENUMBER.length  && HOUSENUMBER.length !== 0) {
         makeInputValid(inputElement);
     } else {
@@ -88,11 +99,12 @@ export const checkHouseNumField = function(inputElement) {
 export const checkFlatNumField = function(inputElement) {
     const FLATNUMBER = inputElement.value;
     /*
-        FLATNUMBER (mandatory, numbers only, positive numbers only, the dash symbol is allowed.
+    FLATNUMBER
+        mandatory, numbers only, positive numbers only, the dash symbol is allowed.
         Means, the flat number shouldn't start with minus/dash symbol.
-        For example: -37 is invalid, but 1-37 is valid)
+        For example: -37 is invalid, but 1-37 is valid
     */
-    const validString = (FLATNUMBER.match(/\d(-?\d+)*/) ?? [[]])
+    const validString = (FLATNUMBER.match(/[1-9]+0*(-?[1-9]+0*)*/) ?? [[]])
     if (validString[0].length === FLATNUMBER.length  && FLATNUMBER.length !== 0) {
         makeInputValid(inputElement);
     } else {
